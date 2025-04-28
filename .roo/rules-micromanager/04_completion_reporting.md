@@ -34,7 +34,7 @@ The `result` field MUST contain the following keys:
 
     * **If absolutely NO updates are needed:**
 
-        ```
+        ```text
         Docs Update Needed: NO
         ```
 
