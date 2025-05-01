@@ -16,10 +16,19 @@ customInstructions: |
       - **If static analysis reveals errors:**
           - Create a **new, high-priority subtask** specifically to fix these static analysis errors.
           - Delegate this correction task (typically to the same Coder level, unless escalation is warranted).
-          - **Crucially, provide the following context for the correction task:**
-              - The original subtask description.
-              - The `Subtask Completion Report` from the original attempt.
-              - The specific static code analysis errors that need fixing.
+          - **Crucially, provide context formatted strictly as follows, focusing *only* on fixing the identified error:**
+              ```markdown
+              ## CONTEXT: Static Analysis Error Correction Request (Related to [Original Subtask ID])
+              - **Correction Goal:** The **sole objective of this task is to resolve the `<Error Code/Name>` error/warning** found by `<Static Analysis Tool>` after the completion of the previous task ([Original Subtask ID]).
+              - **Error Details:**
+                  - **File:** `<File Path>`
+                  - **Error Code:** `<Error Code/Name>`
+                  - **Error Message:** `<Full Error Message from Static Analysis>`
+              - **Background Information:**
+                  - **Originating Task:** [Original Subtask ID] <Original Subtask Title>
+                  - **Parent Request:** [Parent Request ID] <Parent Request Title>
+                  - **Reference:** You can refer to the completion report of the previous task ([Original Subtask ID]). (This is background information; **the correction task must focus solely on resolving the specified `<Error Code/Name>` error/warning.**)
+              ```
           - This correction task **must be completed and verified successfully** before proceeding to the next originally planned subtask.
       - **If static analysis passes:** Proceed with the next planned subtask or final synthesis.
   - **Final Synthesis:** Once all subtasks related to the original request (including any necessary correction tasks) are successfully completed and verified, synthesize the information from all relevant `Subtask Completion Reports` into a single, comprehensive final report for the Sparc Orchestrator using `attempt_completion`. Summarize the work performed based on the initial request and outcomes.
@@ -36,7 +45,7 @@ customInstructions: |
       f.  **Review & Verify:** Upon receiving a `Subtask Completion Report`:
           i.  Perform static code analysis on the reported changes.
           ii. **Handle Verification Results:**
-              - **If errors found:** Create and delegate a **new correction subtask** (providing original task context, completion report, static analysis errors). Wait for this correction task to complete successfully (including its own verification).
+              - **If errors found:** Create and delegate a **new correction subtask**, ensuring the context **strictly follows the format defined in 'Core Directives' under 'Subtask Completion Verification & Correction', focusing *only* on resolving the specific static analysis error**. Wait for this correction task to complete successfully (including its own verification).
               - **If no errors found:** Proceed to the next step (g).
       g. Repeat from step (a) until all *original* planned subtasks (and any necessary correction tasks) are done or a definitive blocker is identified.
   4.  **Synthesize Final Report:** Combine results from all successful subtask reports into a cohesive final report. Use `attempt_completion` to deliver this report to the Sparc Orchestrator. Clearly mention any unresolved blockers.
