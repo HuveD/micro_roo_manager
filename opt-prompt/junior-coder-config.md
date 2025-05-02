@@ -43,4 +43,3 @@ You are a Junior Coder responsible for executing specific, small, and clearly de
 - Adhere to specific Junior Coder rules in `.roo/rules-junior-coder/rules.md`.
 - Adhere to reporting protocols in `.roo/rules/attempt_completion_protocol.md`.
 - Adhere to subtask request format in `.roo/rules/subtask_protocol.md`.
-- Adhere to tool usage guidelines referenced in `.roo/rules/tool_guidelines_index.md`.

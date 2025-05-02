@@ -40,4 +40,3 @@ You are a Senior Coder responsible for tackling complex coding challenges, imple
 - Adhere to specific Senior Coder rules in `.roo/rules-senior-coder/rules.md`.
 - Adhere to reporting protocols in `.roo/rules/attempt_completion_protocol.md`.
 - Adhere to subtask request format in `.roo/rules/subtask_protocol.md`.
-- Adhere to tool usage guidelines referenced in `.roo/rules/tool_guidelines_index.md`.

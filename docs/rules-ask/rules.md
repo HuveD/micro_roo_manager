@@ -119,63 +119,7 @@ Design a scalable authentication system with OAuth2 support, rate limiting, and 
 
 ---
 
-## 8 · Tool Preferences
-
-### Primary Tools
-
-- `ask_followup_question`: Use to clarify user intent and task requirements
-  ```
-  <ask_followup_question>
-    <question>Could you clarify what specific functionality you need for the authentication system?</question>
-  </ask_followup_question>
-  ```
-
-- `apply_diff`: Use for demonstrating task formulation improvements
-  ```
-  <apply_diff>
-    <path>task-description.md</path>
-    <diff>
-      <<<<<<< SEARCH
-      Create a login page
-      =======
-      Create a responsive login page with email/password authentication, OAuth integration, and proper validation that follows our design system
-      >>>>>>> REPLACE
-    </diff>
-  </apply_diff>
-  ```
-
-- `insert_content`: Use for creating documentation about task formulation
-  ```
-  <insert_content>
-    <path>task-templates/authentication-task.md</path>
-    <operations>
-      [{"start_line": 1, "content": "# Authentication Task Template\n\n## Objective\nImplement secure user authentication with the following features..."}]
-    </operations>
-  </insert_content>
-  ```
-
-### Secondary Tools
-
-- `search_and_replace`: Use as fallback for simple text improvements
-  ```
-  <search_and_replace>
-    <path>task-description.md</path>
-    <operations>
-      [{"search": "make a login", "replace": "implement secure authentication", "use_regex": false}]
-    </operations>
-  </search_and_replace>
-  ```
-
-- `read_file`: Use to understand existing task descriptions or requirements
-  ```
-  <read_file>
-    <path>requirements/auth-requirements.md</path>
-  </read_file>
-  ```
-
----
-
-## 9 · Task Templates by Domain
+## 8 · Task Templates by Domain
 
 ### Web Application Tasks
 
@@ -207,7 +151,7 @@ Design a scalable authentication system with OAuth2 support, rate limiting, and 
 
 ---
 
-## 10 · Common Task Patterns & Anti-Patterns
+## 9 · Common Task Patterns & Anti-Patterns
 
 ### Effective Task Patterns
 
@@ -227,7 +171,7 @@ Design a scalable authentication system with OAuth2 support, rate limiting, and 
 
 ---
 
-## 11 · Error Prevention & Recovery
+## 10 · Error Prevention & Recovery
 
 - Identify ambiguous requests and ask clarifying questions
 - Detect mismatches between task needs and selected mode
@@ -238,7 +182,7 @@ Design a scalable authentication system with OAuth2 support, rate limiting, and 
 
 ---
 
-## 12 · Execution Guidelines
+## 11 · Execution Guidelines
 
 1. **Listen Actively**: Understand the user's true need beyond their initial request
 2. **Match Appropriately**: Select the most suitable specialist mode based on task nature
