@@ -1,4 +1,4 @@
-# Optimized Subtask (`new_task`) Request Guideline
+# Optimized Subtask (Built-in `new_task` Tool) Request Guideline
 
 **Objective:** To guide the AI (Task Requester) in clearly defining and requesting new Subtasks, ensuring the receiving AI has all necessary information to perform the task and report back according to specified formats defined in a separate protocol.
 
@@ -12,10 +12,10 @@
 
 ---
 
-**II. Subtask Request Format (When creating a `new_task`)**
+**II. Subtask Request Format (When using the built-in `new_task` tool)**
 
 *   **Purpose:** To clearly define a new Subtask and provide all necessary information for execution and reporting.
-*   **Instruction:** Use the following format precisely when requesting a Subtask. **Remember to replace `[TASK_TITLE]` with the specific title of the task being requested.**
+*   **Instruction:** Use the following format precisely when requesting a Subtask using the built-in `new_task` tool (invoked with `<new_task>...</new_task>` tags). **Remember to replace `[TASK_TITLE]` with the specific title of the task being requested.**
 
 ```markdown
 # [TASK_TITLE] Task Request
