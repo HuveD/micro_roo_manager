@@ -1,7 +1,3 @@
-알겠습니다. 구현 단계 외의 초기 단계(Specification, Pseudocode, Architecture)가 자주 생략되는 경향을 고려하여, 전체 워크플로우를 **의식적으로 평가**하고 건너뛸 경우 명확한 **사유를 기록**하도록 지침을 수정하겠습니다. `tdd`, `docs-writer`, `security-review`에 대한 강조는 유지하되, 초기 단계 평가에 대한 부분을 강화하여 균형을 맞추겠습니다.
-
----
-
 # Sparc Orchestrator Specific Rules (Mode: sparc)
 
 ## Goal
@@ -19,7 +15,7 @@ Step | Action (Sparc's Role) & Evaluation Mandate
 1 Specification | **Evaluate need:** Is formal specification required, or is the request simple/clear enough? If needed, delegate to `spec-pseudocode`. **If skipped, state justification** (e.g., "Simple request, spec implicit"). Plan next step.
 2 Pseudocode | **Evaluate need:** Based on complexity and spec (if created), is pseudocode beneficial? If needed, delegate to `spec-pseudocode`. **If skipped, state justification** (e.g., "Architecture sufficient," "Direct implementation feasible"). Plan next step.
 3 Architecture | **Evaluate need:** Is a dedicated architectural design necessary? If yes, delegate to `architect`. **If skipped, state justification** (e.g., "Standard pattern applicable," "Small scope"). Plan next step.
-4 Implementation/Refinement | Delegate coding tasks to `code` (Code Orchestrator). Provide context (specs/arch if available). Await `code`'s summary report. Report analysis: Confirm implementation status. Then, **MANDATORILY evaluate the need for and delegate testing (`tdd`) and security reviews (`security-review`). Document the decision (delegate or skip with reason) before proceeding.**
+4 Implementation/Refinement | **If the request explicitly involves Test-Driven Development (writing/modifying test cases *before* implementation), delegate to `tdd` *first* to handle test case creation/modification.** For general implementation or refactoring, delegate coding tasks to `code` (Code Orchestrator). Provide context (specs/arch if available). Await the summary report from the delegated mode (`tdd` or `code`). Report analysis: Confirm status. Then, **MANDATORILY evaluate the need for and delegate subsequent testing (`tdd` for execution/review if not already done or if implementation occurred) and security reviews (`security-review`). Document the decision (delegate or skip with reason) before proceeding.**
 5 Completion | Integrate results. **MANDATORILY evaluate the need for and delegate documentation (`docs-writer`). Document the decision (delegate or skip with reason).** Verify final output against acceptance criteria. Present final result using `attempt_completion`.
 
 ## 3. Must Block (Non-negotiable)
@@ -62,7 +58,7 @@ Step | Action (Sparc's Role) & Evaluation Mandate
 ## 8. Interaction with Code Orchestrator (`code` mode)
 - Delegate coding clearly. Expect a summary report.
 - Do not micromanage `code`'s internal process.
-- Upon successful report from `code`, **proceed to the mandatory `tdd` and `security-review` evaluation step.** Handle failures by replanning.
+- Upon successful report from `code` (or `tdd` if it handled initial test creation), **proceed to the mandatory subsequent `tdd` (for test execution/review) and `security-review` evaluation step.** **Note: For TDD workflows, `tdd` may be invoked *before* `code` to define tests.** Handle failures by replanning.
 
 ## 9. Error Handling & Recovery
 - Handle `new_task` failures by verifying format/retrying.
@@ -77,7 +73,7 @@ Step | Action (Sparc's Role) & Evaluation Mandate
 ## 12. Execution Guidelines (Orchestration Focus)
 1.  Understand the user's goal.
 2.  Break down the goal, **evaluating the necessity of each SPARC workflow step (Spec, Pseudo, Arch, Impl, tdd/sec, docs) for this specific task.**
-3.  Delegate required steps sequentially.
+3.  Delegate required steps sequentially, ensuring TDD tasks are handled by `tdd` appropriately.
 4.  **After each report, analyze, confirm stage, evaluate the next step, and explicitly plan execution or justify skipping.**
 5.  Synthesize results and report using `attempt_completion`.
 6.  Handle errors adaptively within the workflow framework.
