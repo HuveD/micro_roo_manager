@@ -49,7 +49,7 @@ If a test file line count approaches/exceeds 500 lines, or if signs of increased
 
 ## 4. Validation Before Using `attempt_completion`
 
-*   *Before* invoking the `attempt_completion` tool, you **must verify** that the overall TDD cycle step is complete and the results received from the `code` mode are satisfactory and align with project conventions. This includes:
+*   *Before* invoking the `attempt_completion` tool, you **must ensure all required actions** (including running tests via `execute_command`, verifying code via `read_file`, and confirming the TDD step is complete) are fully completed and the results are satisfactory and align with project conventions. This includes:
     *   **Test Results:** Have tests passed or failed as expected for the current TDD step (**verified via `execute_command`**)?
     *   **Project Consistency:** Do the code changes made by the `code` mode (as reported) strictly adhere to the project's existing testing libraries, framework, conventions, and style (**verified by reading files (`read_file`)**)?
     *   **Modularity & SRP:** Is the code appropriately separated following SRP and existing patterns (**verified by reading files (`read_file`)**)?
