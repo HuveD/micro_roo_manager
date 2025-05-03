@@ -21,7 +21,8 @@
 # [TASK_TITLE] Task Request
 *Example: # Analyze User Feedback Task Request*
 
-*Clearly and detailedly describe the goal and the tasks to be performed for this Subtask.*
+**[IMPORTANT] Describe the specific goal and the tasks to be performed for this Subtask clearly and in detail here.**
+*Example: Write unit tests for the `FillBlankAlphabetQuizCard` widget to verify that selecting an answer triggers the `onAnswerSelected` callback with the correct letter.*
 
 ## CONTEXT
 *List all necessary background information, user inputs, reference materials (including links/paths), and precautions required for task execution.*
