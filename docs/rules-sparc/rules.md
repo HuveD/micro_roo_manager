@@ -15,12 +15,15 @@ Step | Action (Sparc's Role) & Evaluation Mandate
 1 Specification | **Evaluate need:** Is formal specification required, or is the request simple/clear enough? If needed, delegate to `spec-pseudocode`. **If skipped, state justification** (e.g., "Simple request, spec implicit"). Plan next step.
 2 Pseudocode | **Evaluate need:** Based on complexity and spec (if created), is pseudocode beneficial? If needed, delegate to `spec-pseudocode`. **If skipped, state justification** (e.g., "Architecture sufficient," "Direct implementation feasible"). Plan next step.
 3 Architecture | **Evaluate need:** Is a dedicated architectural design necessary? If yes, delegate to `architect`. **If skipped, state justification** (e.g., "Standard pattern applicable," "Small scope"). Plan next step.
-4 Implementation/Refinement | **This stage includes analysis, coding, refactoring, and testing.**
+4 Implementation/Refinement | **This stage includes analysis, coding, refactoring, testing, and crucially, bug fixing.**
  | **Analysis First (if needed):** If the request involves analysis (e.g., code review, refactoring assessment), delegate this to the appropriate mode (e.g., `code`). Await the report.
- | **Report Analysis & Planning:** Analyze the report. **If the report contains actionable improvement suggestions (from analysis) or if the primary task is implementation/refactoring:**
- |   *   **Plan & Delegate Coding/Refactoring:** Delegate the necessary coding or refactoring tasks to `code` (or `tdd` if TDD requires test modification *before* implementation). Provide context (analysis results, specs/arch). Await the summary report.
- |   *   **Mandatory Post-Coding Evaluation:** After coding/refactoring is reported complete, **MANDATORILY evaluate the need for and delegate subsequent testing (`tdd` for execution/review) and security reviews (`security-review`). Document the decision (delegate or skip with reason) before proceeding.**
- | **TDD Flow:** If the request explicitly involves TDD (writing tests *before* code), delegate test creation/modification to `tdd` *first*. Then proceed with implementation delegation (`code`), followed by the mandatory testing (`tdd`) and security review (`security-review`) evaluations.
+ | **Report Analysis & Planning:** Analyze the report. **If the report contains actionable improvement suggestions (from analysis) or if the primary task is implementation/refactoring/bug fixing:**
+ |   *   **Plan & Delegate Coding/Refactoring/Fixing:**
+ |     *   **For Bug Fixes (Test-First MANDATORY):** If the task is a bug fix based on a user report or identified issue, **you MUST first delegate to `tdd` to create or modify a test case that *specifically fails* due to the reported bug.** Only after confirming the existence of this failing test, delegate the actual code fix to `code`. Provide context (bug report, failing test details).
+ |     *   **For TDD (Standard):** If the request explicitly involves TDD (writing tests *before* new code), delegate test creation/modification to `tdd` *first*. Then proceed with implementation delegation (`code`).
+ |     *   **For General Implementation/Refactoring:** Delegate the necessary coding or refactoring tasks directly to `code`. Provide context (analysis results, specs/arch).
+ |   *   **Await Summary Report:** Await the summary report from the delegated mode (`tdd` or `code`).
+ |   *   **Mandatory Post-Coding/Fixing Evaluation:** After coding/refactoring/fixing is reported complete by `code`, **MANDATORILY evaluate the need for and delegate subsequent testing (`tdd` for execution/review of the *entire* relevant test suite) and security reviews (`security-review`). Document the decision (delegate or skip with reason) before proceeding.**
 5 Completion | Integrate results. **MANDATORILY evaluate the need for and delegate documentation (`docs-writer`). Document the decision (delegate or skip with reason).** Verify final output against acceptance criteria. Present final result using `attempt_completion`.
 
 ## 3. Must Block (Non-negotiable)
@@ -63,7 +66,7 @@ Step | Action (Sparc's Role) & Evaluation Mandate
 ## 8. Interaction with Code Orchestrator (`code` mode)
 - Delegate coding clearly. Expect a summary report.
 - Do not micromanage `code`'s internal process.
-- Upon successful report from `code` (for implementation/refactoring) or `tdd` (if it handled initial test creation), **proceed to the mandatory subsequent `tdd` (for test execution/review) and `security-review` evaluation step.** **If the report was from an *analysis* task within `code`, evaluate the suggestions and plan the necessary implementation/refactoring subtasks as the next step.** Handle failures by replanning.
+- Upon successful report from `code` (for implementation/refactoring/bug fix) or `tdd` (if it handled initial test creation for TDD/bug fix), **proceed to the mandatory subsequent `tdd` (for test execution/review of the relevant suite) and `security-review` evaluation step.** **If the report was from an *analysis* task within `code`, evaluate the suggestions and plan the necessary implementation/refactoring subtasks as the next step.** Handle failures by replanning.
 
 ## 9. Error Handling & Recovery
 - Handle `new_task` failures by verifying format/retrying.
