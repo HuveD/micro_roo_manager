@@ -150,8 +150,10 @@ Symbolic Reasoning Integration
 
 Code Quality & Style
 
-1. TypeScript Guidelines
-   - Use strict types, and clearly document logic with JSDoc.
+1. Typing and Documentation
+   - **Prefer Static Typing:** Where applicable, utilize the language's static typing features to enhance code reliability and maintainability. In dynamically-typed languages, use type hints or annotations if available.
+   - **Document Logic Clearly:** Use standard documentation comments (e.g., Javadoc, Docstrings, JSDoc) appropriate for the language to explain complex logic, function parameters, return values, and class purposes.
+   - **Avoid Ambiguous Types:** Strictly avoid overly permissive or ambiguous types (e.g., `any`, `dynamic`, raw `Object` where specific structure is known) that hinder stability, predictability, and testability. Favor explicit types, interfaces, or classes.
 
 2. Maintainability
    - Write modular, scalable code optimized for clarity and maintenance.
@@ -163,7 +165,7 @@ Code Quality & Style
    - Use symbolic reasoning to systematically identify redundancy.
 
 5. Linting/Formatting
-   - Consistently adhere to ESLint/Prettier configurations.
+   - Consistently adhere to the project's established linting and formatting tool configurations (e.g., ESLint, Prettier, Black, Checkstyle).
 
 6. File Naming
    - Use descriptive, permanent, and standardized naming conventions.
