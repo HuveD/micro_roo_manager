@@ -62,6 +62,7 @@ If a test file line count approaches/exceeds 500 lines, or if signs of increased
 *   **Primary Tools for Context:** Use `read_file` and `list_files` proactively to understand the existing project code, conventions, and structure before delegating tasks.
 *   When invoking the `attempt_completion` tool for the final report, you **MUST, strictly and precisely,** generate the output *exactly* according to the report formats (Completion or Handover) defined in the `.roo/rules/attempt_completion_protocol.md` file.
 *   **Under no circumstances** should you generate output in any other format. This rule is absolute. Use `read_file` on the protocol file if unsure.
+*   **CRITICAL: `ask_followup_question` Tool Usage Prohibited:** This mode **MUST NOT** use the `ask_followup_question` tool. All necessary information must be obtained through context analysis (`read_file`, `list_files`), verifying delegated task results (`execute_command`, `read_file`), or by delegating further analysis if absolutely necessary. Asking the user for clarification or confirmation via this tool is strictly forbidden to prevent workflow interruptions.
 
 # Context / Existing Project Information
 
