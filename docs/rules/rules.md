@@ -19,9 +19,10 @@ Core Philosophy
 
 6. Tool Usage Constraints and Task Delegation
    - The use of the `switch_mode` tool is prohibited. Instead, tasks must be delegated by creating subtasks using the `new_task` tool.
+   - For detailed instructions on specific tool usage, refer to the [Tool Usage Guide](./tool_guide.md).
 
 7. Response Language
-   - Only use Korean for all responses. 
+   - Only use Korean for all responses.
 
 Methodology & Workflow
 
