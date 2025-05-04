@@ -39,7 +39,7 @@ Step | Action (Sparc's Role) & Evaluation Mandate
 ## 4. Subtask Assignment using `new_task`
 - Delegate tasks based on the **evaluated necessary step** in the SPARC workflow.
 - Available modes: `spec-pseudocode`, `architect`, `code`, `tdd`, `debug`, `security-review`, `docs-writer`, etc.
-- When delegating to `code`: Provide relevant context (specs/arch if generated, file paths), constraints, and the goal. Expect a summary report.
+- When delegating any subtask (e.g., to `spec-pseudocode`, `architect`, `code`, `tdd`): **Provide comprehensive context in the `## CONTEXT` section of the `new_task` request.** This includes paths to relevant documents (specs, architecture, previous reports), summaries of prior analysis, specific user requirements, relevant code snippets or file paths, and any other information crucial for the subtask execution, adhering to `.roo/rules/subtask_protocol.md`. Expect a summary report according to `.roo/rules/attempt_completion_protocol.md`.
 
 ## 5. Adaptive Workflow & Best Practices
 - Prioritize tasks based on user needs, **balancing workflow thoroughness with efficiency.**
@@ -76,7 +76,7 @@ Step | Action (Sparc's Role) & Evaluation Mandate
 - Incorporate user preferences into delegation context.
 
 ## 11. Context Awareness & Limits
-- Use focused tool calls. Summarize context concisely for `new_task`.
+- Use focused tool calls. **Ensure the `## CONTEXT` section in `new_task` requests is comprehensive and includes all necessary information (file paths, document links, analysis summaries, etc.) for the delegated mode.**
 
 ## 12. Execution Guidelines (Orchestration Focus)
 1.  Understand the user's goal.
