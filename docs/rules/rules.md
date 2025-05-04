@@ -16,8 +16,8 @@
 2.  **Response Language:**
     *   Respond only in Korean.
 3.  **Documentation Management:**
-    *   All specification and documentation artifacts MUST reside within the `/docs` directory structure defined below.
-    *   Context referencing MUST be based on documents within `/docs`.
+    *   All specification and documentation artifacts MUST reside within the `docs/` directory structure defined below.
+    *   Context referencing MUST be based on documents within `docs/`.
 
 ## Methodology & Roles
 *   Follow structured SPARC workflows (Specification to Deployment) as detailed in `docs/rules-sparc/rules.md`.
@@ -25,14 +25,14 @@
 *   Continuously improve codebase via analysis and feedback.
 *   Integrate reflective awareness at each stage.
 *   **Role Distinction:**
-    *   `spec-pseudocode` (Specification Writer): Responsible for creating and *updating* the living specification documents and pseudocode within `/docs/specifications` and `/docs/pseudocode` throughout the workflow, based on SPARC requests. Manages removal of obsolete information.
-    *   `docs-writer` (Documentation Writer): Responsible for creating final user and technical documentation within `/docs/user-guides` and `/docs/technical-docs` *after* the entire SPARC task is completed, using the final updated specifications and SPARC's detailed completion report as primary inputs.
+    *   `spec-pseudocode` (Specification Writer): Responsible for creating and *updating* the living specification documents and pseudocode within `docs/specifications` and `docs/pseudocode` throughout the workflow, based on SPARC requests. Manages removal of obsolete information.
+    *   `docs-writer` (Documentation Writer): Responsible for creating final user and technical documentation within `docs/user-guides` and `docs/technical-docs` *after* the entire SPARC task is completed, using the final updated specifications and SPARC's detailed completion report as primary inputs.
 
-## Documentation Folder Structure (`/docs`)
+## Documentation Folder Structure (`docs/`)
 
-To maintain clarity and alignment with DDD principles, all specification and documentation artifacts generated during the SPARC workflow MUST reside within the `/docs` directory, following this structure:
+To maintain clarity and alignment with DDD principles, all specification and documentation artifacts generated during the SPARC workflow MUST reside within the `docs/` directory, following this structure:
 
-/docs
+docs/
 ├── README.md             # High-level overview of the documentation structure
 ├── specifications/       # Living documents defining system behavior (Managed by spec-pseudocode)
 │   ├── bounded-contexts/ # Specifications organized by DDD Bounded Contexts
@@ -81,8 +81,8 @@ To maintain clarity and alignment with DDD principles, all specification and doc
 
 ## Configuration & Context Management
 *   **`.roorules`:** Defines available AI modes and their specific operational rules (`.roo/rules-<mode>/*.md`).
-*   **`/docs` Directory:** Serves as the primary source of truth and context. All specifications, architecture, pseudocode, and final documentation reside here.
-*   **Document-Based Context:** AI modes MUST derive their understanding and context primarily from the relevant documents within the `/docs` structure provided in task requests. Reference existing documents for consistency and informed decision-making.
+*   **`docs/` Directory:** Serves as the primary source of truth and context. All specifications, architecture, pseudocode, and final documentation reside here.
+*   **Document-Based Context:** AI modes MUST derive their understanding and context primarily from the relevant documents within the `docs/` structure provided in task requests. Reference existing documents for consistency and informed decision-making.
 
 ## Programming Guidelines
 *   **Clarity:** Write straightforward, self-explanatory code. Use comments for complex logic.
@@ -90,26 +90,26 @@ To maintain clarity and alignment with DDD principles, all specification and doc
 *   **Consistency:** Maintain uniform conventions across the project codebase.
 
 ## Project Understanding
-*   **Documentation First:** Review essential docs within `/docs` before implementation. Request clarification or specification updates via SPARC if needed.
-*   **Architecture Adherence:** Follow established module boundaries and designs documented in `/docs/architecture`. Justify architectural deviations via ADRs.
+*   **Documentation First:** Review essential docs within `docs/` before implementation. Request clarification or specification updates via SPARC if needed.
+*   **Architecture Adherence:** Follow established module boundaries and designs documented in `docs/architecture`. Justify architectural deviations via ADRs.
 *   **Pattern/Stack Awareness:** Use documented technologies/patterns. Justify introducing new elements.
 
 ## SPARC Workflow Execution
 *   **Detailed Workflow:** The full SPARC workflow (Specification, Pseudocode, Architecture, Implementation/Refinement, Completion) including mandatory evaluation and **document update steps** is defined in `docs/rules-sparc/rules.md`. **Adhere strictly to this detailed workflow.**
 
 ## AI Collaboration
-*   **Clear Instructions:** Provide explicit directives, outcomes, constraints, context (referencing specific documents in `/docs`).
-*   **Context Referencing:** Reference relevant documents in `/docs`.
+*   **Clear Instructions:** Provide explicit directives, outcomes, constraints, context (referencing specific documents in `docs/`).
+*   **Context Referencing:** Reference relevant documents in `docs/`.
 *   **Suggest vs. Apply:** Clearly indicate AI action ("Suggestion:" vs. "Applying fix:").
 *   **Critical Evaluation:** Thoroughly review AI outputs against documents and requirements.
 *   **Focused Tasks:** Assign specific, well-defined tasks aligned with documents.
 *   **Leverage Strengths:** Use AI for refactoring, analysis, optimization, test generation based on specs. Human oversight for core logic/architecture.
 *   **Incremental Progress:** Break complex tasks into reviewable sub-steps with potential document updates.
-*   **Standard Check-in:** Confirm understanding referencing documents (e.g., "Reviewed `/docs/specifications/.../spec.md`, goal is [goal], proceeding with [step].").
+*   **Standard Check-in:** Confirm understanding referencing documents (e.g., "Reviewed `docs/specifications/.../spec.md`, goal is [goal], proceeding with [step].").
 
 ## Advanced Capabilities
 *   Utilize AI's emergent intelligence, pattern recognition, and adaptive optimization capabilities where appropriate, guided by specifications.
-*   Integrate symbolic reasoning for robust decision-making and coherent documentation, grounded in `/docs`.
+*   Integrate symbolic reasoning for robust decision-making and coherent documentation, grounded in `docs/`.
 
 ## Code Quality & Style
 1.  **Typing & Documentation:**
@@ -152,7 +152,7 @@ To maintain clarity and alignment with DDD principles, all specification and doc
 *   **Server Management:** Restart servers systematically after updates.
 
 ## Documentation Maintenance (Living Documents)
-*   **Accurate & Updated:** Keep `/docs/specifications` and other relevant documents current throughout the development lifecycle via SPARC-delegated updates.
+*   **Accurate & Updated:** Keep `docs/specifications` and other relevant documents current throughout the development lifecycle via SPARC-delegated updates.
 *   **Continuous Updates:** Regularly refine guidelines.
 *   **Check Files:** Ensure all documented files are accurate and relevant.
 *   **Comments:** Use code comments to clarify implementation details not obvious from specs.

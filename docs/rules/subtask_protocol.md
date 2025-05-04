@@ -42,12 +42,12 @@
 ## CONTEXT
 *Detailed description of all background information, user input, and reference materials required for performing the task (file paths, document links/paths, descriptions of relevant images, log file paths, summary of previous step results, etc.), as well as precautions.*
 - e.g., User Query: "..."
-- e.g., Relevant Document Path: `/docs/relevant_info.md`
+- e.g., Relevant Document Path: `docs/relevant_info.md`
 - e.g., API Endpoint: `https://api.example.com/data`
 - e.g., Precaution: Must use a specific library version (v1.2.3)
 - e.g., Description of Relevant Image: `screenshot_error.png` (Refer to attached image, showing a specific UI element error)
 - e.g., Relevant Log File: `/logs/app_error.log` (Need to check logs at the time of error occurrence)
-- e.g., Result from Previous Step: Refer to Specification document (`/docs/spec_v1.md`)
+- e.g., Result from Previous Step: Refer to Specification document (`docs/spec_v1.md`)
 
 ## Constraints
 *Explicitly list the **strictly permitted tasks** for this Subtask. Define the boundaries clearly.*
