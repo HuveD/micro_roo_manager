@@ -68,7 +68,3 @@ curl -s "$REPO_URL/docs/README.md" -o ".roo/README.md" || echo "❌ Failed to do
 
 echo "✅ Installation completed!"
 echo "🔧 .roomodes file and .roo directory have been successfully installed."
-
-# 스크립트 자체 삭제
-echo "🧹 Removing installation script..."
-rm install.sh
