@@ -22,8 +22,23 @@
 *Example: # Analyze User Feedback Task Request*
 
 **[IMPORTANT] Describe the specific goal and the tasks to be performed for this Subtask clearly and in detail here.**
-*Example: Write unit tests for the `FillBlankAlphabetQuizCard` widget to verify that selecting an answer triggers the `onAnswerSelected` callback with the correct letter.*
+*Provide a comprehensive description of the subtask's objective and the specific actions the receiving AI needs to take. Be explicit about the expected outcome and any key requirements.*
 
+*Example 1 (Coding Task):*
+*Goal: Implement unit tests for the `FillBlankAlphabetQuizCard` widget.*
+*Tasks:*
+*   *Verify that selecting a correct answer option triggers the `onAnswerSelected` callback with the correct letter.*
+*   *Verify that selecting an incorrect answer option triggers the `onAnswerSelected` callback with the incorrect letter.*
+*   *Ensure that the widget's state updates correctly after an answer is selected (e.g., visual feedback).*
+*   *Cover edge cases, such as empty input or null callbacks.*
+
+*Example 2 (Analysis Task):*
+*Goal: Analyze user feedback logs to identify the most common issues reported in the last 7 days.*
+*Tasks:*
+*   *Parse log files located in `/logs/user_feedback/` from the past week.*
+*   *Categorize feedback entries based on keywords (e.g., "bug", "feature request", "UI issue").*
+*   *Count the occurrences of each category.*
+*   *Summarize the top 3 most frequent issue categories and provide representative examples for each.*
 ## CONTEXT
 *Detailed description of all background information, user input, and reference materials required for performing the task (file paths, document links/paths, descriptions of relevant images, log file paths, summary of previous step results, etc.), as well as precautions.*
 - e.g., User Query: "..."
