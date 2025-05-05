@@ -57,7 +57,7 @@ If triggered:
 *Before* reporting, ensure:
 *   ✅ **Specification Document Confirmed:** Valid path within `docs/` received initially.
 *   ✅ **TDD Cycle Complete:** Red-Green-Refactor done based on *that* document.
-*   ✅ **Tests Verified:** Final tests run (`execute_command`) and passed.
+*   ✅ **Tests Verified & Passed:** Final tests run (`execute_command`) and **confirmed to pass**. This includes a full test suite run to ensure no regressions.
 *   ✅ **Code Verified:** Final code checked (`read_file`) for strict adherence to the **specific specification document** and conventions.
 *   ✅ **Test Suite Maintained:** Obsolete tests handled per Section 6 based on changes reflected in the **specific specification document**.
 *   ✅ **Change Log Complete:** All non-test code modifications **AND test case changes (additions, modifications, removals)** documented with rationale **explicitly referencing the specific specification document path**.
