@@ -43,4 +43,62 @@ Search for `TODO` or `FIXME` comments in all TypeScript files within the `src` d
 ```
 
 ---
+
+## `read_file`
+
+### Overview
+
+The `read_file` tool reads the contents of a file in your project. It is used to inspect code, configuration files, and documentation to provide better context and support for development tasks.
+
+### Parameters
+
+*   `path` (required): The path to the file to read, relative to the workspace root.
+*   `start_line` (optional): The starting line number to read from (1-based, inclusive).
+*   `end_line` (optional): The ending line number to read to (1-based, inclusive).
+
+### Usage
+
+*   **Code Review:** Read source files to understand or review code.
+*   **Configuration Analysis:** Inspect config files for troubleshooting or setup.
+*   **Documentation:** Read documentation files before suggesting changes or improvements.
+*   **Partial Reads:** Use `start_line` and `end_line` to efficiently read only the relevant section of large files.
+
+### Reading Strategy
+
+1. **Explicit Line Range:**
+    - If `start_line` or `end_line` is provided, only the specified range is read.
+    - This is the highest priority and is efficient for large files.
+2. **Automatic Truncation:**
+    - If no line range is specified and the file is large (e.g., over 500 lines), only the first N lines (e.g., 500) are read.
+    - A truncation notice is appended, and for code files, a summary of definitions may be included.
+3. **Full File Read:**
+    - If the file is small or a supported binary (PDF/DOCX), the entire content is read or extracted.
+
+### Example
+
+Read the entire file:
+```xml
+<read_file>
+<path>src/app.js</path>
+</read_file>
+```
+
+Read a specific line range:
+```xml
+<read_file>
+<path>src/app.js</path>
+<start_line>10</start_line>
+<end_line>20</end_line>
+</read_file>
+```
+
+### Error Handling
+
+*   If the file does not exist, an error message is returned.
+*   If access is denied (e.g., by `.rooignore`), an error message is returned.
+*   For very large files, only the first N lines are shown with a truncation notice.
+
+### Reference
+- For more details, see the [official documentation](https://docs.roocode.com/advanced-usage/available-tools/read-file).
+
 <!-- Add guides for other tools below this line -->
