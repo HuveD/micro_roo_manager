@@ -164,3 +164,19 @@ Check line counts of files in the `src` directory:
 ```
 
 <!-- Add guides for other tools below this line -->
+## Platform-Specific Static Analysis and Unit Testing Commands
+
+This table provides common single-run commands for static analysis and unit testing across various platforms.
+
+| Language/Platform | Static Analysis Command | Test Execution Command |
+|-------------------|-------------------------|------------------------|
+| Flutter (Dart)    | `flutter analyze`       | `flutter test`         |
+| Go (Golang)       | `golangci-lint run ./...`          | `go test ./...`        |
+| Java (Gradle)     | `./gradlew check`       | `./gradlew test`       |
+| JavaScript/TS     | `npx eslint .`          | `npm test -- --watchAll=false`             |
+| Python            | `flake8 .`              | `pytest`               |
+| C# (.NET)         | `dotnet build`          | `dotnet test`          |
+| Rust              | `cargo clippy`          | `cargo test`           |
+| Kotlin (Gradle)   | `./gradlew lintKotlin`  | `./gradlew test`       |
+| Swift             | `swiftlint`             | `swift test`           |
+| PHP               | `phpstan analyse src/`  | `phpunit`              |
