@@ -30,7 +30,7 @@ curl -s https://raw.githubusercontent.com/HuveD/micro_roo_manager/main/install.s
 ```
 
 - The script will check for `jq` and install it if not present.
-- On macOS, Homebrew is required for automatic installation. If you don't have Homebrew, install it from https://brew.sh
+- On macOS, Homebrew is required for automatic installation. If you don't have Homebrew, install it from <https://brew.sh>
 - On Linux, `sudo apt-get` is used. For other distributions, please install jq manually.
 
 ## Core Principles
