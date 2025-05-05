@@ -1,4 +1,4 @@
-# Agentic Coding MCP
+# Agentic Coding MCPs
 
 ## Overview
 
