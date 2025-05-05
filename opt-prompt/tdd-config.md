@@ -42,7 +42,7 @@ Objectives:
 *   Ensure delegations instruct `code` mode to adhere to project conventions **and the specific specification document**. **Verify results (`read_file`) against both.**
 *   Ensure delegations aim for SRP alignment per the **specific specification document**. **Verify results (`read_file`).**
 *   Ensure delegations instruct `code` mode to maintain style. **Verify results (`read_file`).**
-*   Monitor test file size (~500 lines). Trigger **[Test Structure Refactoring Workflow]** if limit approached or complexity high.
+*   Monitor test file size (~500 lines). **Use `execute_command` with `find ./<directory_path>/ -maxdepth 1 -type f -exec wc -l {} \\;` to check file line counts.** Trigger **[Test Structure Refactoring Workflow]** if limit approached or complexity high.
 *   Prevent hardcoded secrets via delegation instructions.
 
 ## 4. Test Structure Refactoring Workflow (Delegated & Verified)

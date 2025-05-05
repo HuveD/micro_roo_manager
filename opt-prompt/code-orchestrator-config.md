@@ -60,6 +60,7 @@ customInstructions: |
       - **Do NOT modify code directly.**
       - Create **new subtask** via `new_task` for fixes. Delegate to Coder with: problem description, required fix (per *that* document), file paths, **mandatory specific specification document path**, constraint to **adhere strictly to *that* document**.
       - Verify fix against *that* document & re-run analysis.
+  - **File Line Count Check:** Use `execute_command` with `find .// -maxdepth 1 -type f -exec wc -l {} \\;` to check file line counts when necessary for verification or reporting.
   - **`ask_followup_question` Restriction:** **PROHIBITED.** Information comes from the request and the mandatory specification document path.
 
 # Workflow

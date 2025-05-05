@@ -127,4 +127,40 @@ Read a specific line range:
 ### Reference
 - For more details, see the [official documentation](https://docs.roocode.com/advanced-usage/available-tools/read-file).
 
+---
+
+## `execute_command`
+
+### Overview
+
+The `execute_command` tool executes a CLI command on the system. Use this when you need to perform system operations or run specific commands to accomplish any step in the user's task.
+
+### Parameters
+
+*   `command` (required): The CLI command to execute.
+*   `cwd` (optional): The working directory to execute the command in (defaults to the workspace root).
+
+### Usage
+
+*   **System Operations:** Run build scripts, install dependencies, manage files, etc.
+*   **Verification:** Execute commands to check system state or verify results.
+*   **File Line Counts:** Use `find .// -maxdepth 1 -type f -exec wc -l {} \\;` to check file line counts within the current directory (or specify a different directory with `cwd`).
+
+### Example
+
+Execute `npm install` in the workspace root:
+```xml
+<execute_command>
+<command>npm install</command>
+</execute_command>
+```
+
+Check line counts of files in the `src` directory:
+```xml
+<execute_command>
+<command>find .// -maxdepth 1 -type f -exec wc -l {} \\;</command>
+<cwd>src</cwd>
+</execute_command>
+```
+
 <!-- Add guides for other tools below this line -->

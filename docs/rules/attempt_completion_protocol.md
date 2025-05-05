@@ -31,7 +31,7 @@
 - e.g., Database record updated: ID `user_feedback_analysis_#123`
 
 ## (Optional) Scope of Changes & Impact
-*Describe any modifications made (e.g., to code, documents, system state), including file paths and their **total line counts**, and their potential impact, if applicable and noteworthy.*
+*Describe any modifications made (e.g., to code, documents, system state), including file paths and their **total line counts**(**Use `execute_command` with `find ./<directory_path>/ -maxdepth 1 -type f -exec wc -l {} \\;` to check file line counts.**), and their potential impact, if applicable and noteworthy.*
 - e.g., Refactored `data_parser.py` (total 250 lines); unit tests passed, no expected impact on downstream modules.
 - e.g., Updated documentation section 4.1 in `docs/analysis.md` (total 85 lines) regarding the new analysis method.
 
@@ -73,7 +73,7 @@
 - e.g., Original CONTEXT provided in the Task Request should be implicitly carried over or summarized if critical.
 
 ## (Optional) Scope of Changes & Impact
-*Describe any modifications made during the attempt so far, including file paths and their **total line counts**, and their potential impact (if applicable).*
+*Describe any modifications made during the attempt so far, including file paths and their **total line counts** (**Use `execute_command` with `find ./<directory_path>/ -maxdepth 1 -type f -exec wc -l {} \\;` to check file line counts.**), and their potential impact (if applicable).*
 - e.g., Added new function to `utils/helper.js` (total 120 lines).
 
 ## Reason for Handover
