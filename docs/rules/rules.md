@@ -1,4 +1,4 @@
-# SPARC Global Development Rules
+# SPARC Global Development Rules2
 
 ## Core Principles
 1.  **Simplicity:** Prioritize clear, maintainable solutions. Minimize complexity.
