@@ -4,6 +4,32 @@ This document provides guidelines and usage instructions for various tools avail
 
 ---
 
+## General Tool Usage Format
+
+All tools must be invoked using XML-style tags. The tool name itself forms the main tag, and each parameter is enclosed within its own tag inside the main tool tag.
+
+**Correct Format:**
+
+```xml
+<tool_name>
+  <parameter1_name>value1</parameter1_name>
+  <parameter2_name>value2</parameter2_name>
+</tool_name>
+```
+
+**Incorrect Format (Example):**
+
+```xml
+<tool_use>  <!-- Incorrect: Should be the tool name -->
+  <tool_name>read_file</tool_name> <!-- Incorrect: Parameter name should be used -->
+  value_here <!-- Incorrect: Value should be inside parameter tags -->
+</tool_use>
+```
+
+Always refer to the specific tool's documentation below for the correct parameters and usage.
+
+---
+
 ## `search_files`
 
 ### Overview
