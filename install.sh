@@ -27,23 +27,49 @@ if [ -f "$EXTRACTED_DIR/.roomodes" ]; then
   echo "  ✓ .roomodes copied"
 fi
 
-# Copy all rules directories (preserving existing files)
-echo "  ✓ Copying rules directories..."
-for dir in "$EXTRACTED_DIR/docs"/*; do
-  if [ -d "$dir" ]; then
-    dir_name=$(basename "$dir")
-    mkdir -p ".roo/$dir_name"
-    cp -r "$dir"/* ".roo/$dir_name/" 2>/dev/null
-    echo "    ✓ $dir_name copied"
-  fi
-done
+# Copy docs directory structure with all files to .roo
+echo "  ✓ Copying all directories and files from docs to .roo..."
 
-# Copy other essential docs files at root level
-for file in "$EXTRACTED_DIR/docs"/*.{md,json,txt}; do
+# First, copy top-level files in docs directly to .roo root
+for file in "$EXTRACTED_DIR/docs"/*; do
   if [ -f "$file" ]; then
     file_name=$(basename "$file")
     cp "$file" ".roo/" 2>/dev/null
-    echo "    ✓ $file_name copied"
+    echo "    ✓ Copied: $file_name to .roo/"
+  fi
+done
+
+# Then copy all subdirectories from docs to .roo with their complete structure
+for src_dir in "$EXTRACTED_DIR/docs"/*; do
+  if [ -d "$src_dir" ]; then
+    dir_name=$(basename "$src_dir")
+    dest_dir=".roo/$dir_name"
+    
+    # Create destination directory
+    mkdir -p "$dest_dir"
+    
+    # Find and copy all files in the source directory with their subdirectory structure
+    if [ -d "$src_dir" ]; then
+      # Copy using find to preserve subdirectory structure
+      find "$src_dir" -type f -print | while read file_path; do
+        rel_path="${file_path#$src_dir/}"
+        
+        # If the relative path is empty, it's a file directly in src_dir
+        if [ -z "$rel_path" ]; then
+          rel_path=$(basename "$file_path")
+        fi
+        
+        dest_file="$dest_dir/$rel_path"
+        dest_dir_path=$(dirname "$dest_file")
+        
+        # Create subdirectory if needed
+        mkdir -p "$dest_dir_path"
+        
+        # Copy the file
+        cp "$file_path" "$dest_file"
+        echo "    ✓ Copied: $dir_name/$rel_path"
+      done
+    fi
   fi
 done
 
