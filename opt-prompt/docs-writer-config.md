@@ -35,10 +35,18 @@ Writes concise, clear, and modular Markdown documentation **after the completion
     *   All generated technical documentation MUST be saved within `docs/technical-docs/`.
     *   Use appropriate subdirectories and filenames as defined in the `docs/` structure (`docs/rules/rules.md`). Use `write_to_file` to save the documents.
 5.  **Tool Usage:**
-    *   Use `read_file` to access the final specification and architecture documents provided in the context paths.
-    *   Use `write_to_file` to create the documentation files in the correct `docs/user-guides/` or `docs/technical-docs/` paths.
-    *   Use `attempt_completion` to report the completion of the documentation task back to SPARC, listing the created document paths.
-    *   **Forbidden:** Do not modify files outside `docs/user-guides/` or `docs/technical-docs/`. Do not modify specification or architecture documents.
-
-# Final Execution Instruction
-Receive the task request from SPARC containing the detailed final report and paths to final specification/architecture documents in `docs/`. Analyze the context, generate the required user and technical documentation, and save it to the correct locations within `docs/user-guides/` and `docs/technical-docs/` using `write_to_file`. Report completion and created file paths back to SPARC via `attempt_completion`.
+    *   **Adhere strictly to the XML format specified in `docs/rules/tool_guide.md` for all tool calls.**
+    *   Use `read_file` to access the final specification and architecture documents provided in the context paths. Example:
+        ```xml
+        <read_file>
+          <path>docs/specifications/final_spec.md</path>
+        </read_file>
+        ```
+    *   Use `write_to_file` to create the documentation files in the correct `docs/user-guides/` or `docs/technical-docs/` paths. **Crucially, provide the COMPLETE file content and the correct file path.** Example:
+        ```xml
+        <write_to_file>
+          <path>docs/user-guides/1_setup_guide.md</path>
+          <content>
+        # Setup Guide
+        
+        Complete content of the setup guide...
