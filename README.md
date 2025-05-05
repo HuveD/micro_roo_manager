@@ -1,4 +1,3 @@
-
 # Micro Roo Manager
 
 > An AI-driven orchestration framework inspired by SPARC methodology and micro-responsibility principles
@@ -13,9 +12,26 @@ The project draws inspiration from:
 
 ## Quick Installation
 
+> **Note:** This project requires `jq` (a lightweight JSON processor) for installation. The install script will attempt to install it automatically using Homebrew (macOS) or apt (Linux). If you are on a different OS, please install jq manually before running the script.
+>
+> **If you want to install jq manually:**
+> - **macOS:**
+>   ```bash
+>   brew install jq
+>   ```
+> - **Ubuntu/Debian Linux:**
+>   ```bash
+>   sudo apt-get update && sudo apt-get install -y jq
+>   ```
+> - **Other OS:** See [https://stedolan.github.io/jq/download/](https://stedolan.github.io/jq/download/) for installation instructions.
+
 ```bash
 curl -s https://raw.githubusercontent.com/HuveD/micro_roo_manager/main/install.sh | bash
 ```
+
+- The script will check for `jq` and install it if not present.
+- On macOS, Homebrew is required for automatic installation. If you don't have Homebrew, install it from https://brew.sh
+- On Linux, `sudo apt-get` is used. For other distributions, please install jq manually.
 
 ## Core Principles
 

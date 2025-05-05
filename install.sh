@@ -1,19 +1,31 @@
 #!/bin/bash
 
-# micro_roo_manager 설치 스크립트
+# micro_roo_manager installation script
 echo "🚀 Starting micro_roo_manager installation..."
 
-# GitHub raw URL 설정
+# Set GitHub raw URL
 REPO_URL="https://raw.githubusercontent.com/HuveD/micro_roo_manager/main"
 
-# 필요한 디렉토리 생성 (.roo 폴더)
+# Check and install jq if not present
+if ! command -v jq &> /dev/null; then
+  echo "🔧 jq is not installed. Installing jq..."
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    # macOS
+    brew install jq || { echo "❌ Failed to install jq. Please install it manually."; exit 1; }
+  else
+    # Linux (apt-based)
+    sudo apt-get update && sudo apt-get install -y jq || { echo "❌ Failed to install jq. Please install it manually."; exit 1; }
+  fi
+fi
+
+# Create required directory (.roo folder)
 mkdir -p .roo
 
-# .roomodes 파일 다운로드
+# Download .roomodes file
 echo "⬇️ Downloading .roomodes file..."
 curl -s "$REPO_URL/.roomodes" -o .roomodes
 
-# .roo 내에 rules 관련 디렉토리 생성
+# Create rules folder structure in .roo directory
 echo "⬇️ Creating rules folder structure in .roo directory..."
 RULE_DIRS=(
   "rules"
@@ -38,28 +50,23 @@ RULE_DIRS=(
   "rules-architect"
 )
 
-# 각 rules 디렉토리 생성
+# Create each rules directory
 for dir in "${RULE_DIRS[@]}"; do
   mkdir -p ".roo/$dir"
 done
 
-# 각 디렉토리의 rules.md 파일 다운로드
-echo "⬇️ Downloading rules files..."
+# Download all files in each rules directory (GitHub API + jq)
+GITHUB_API_URL="https://api.github.com/repos/HuveD/micro_roo_manager/contents/docs"
 for dir in "${RULE_DIRS[@]}"; do
-  echo "⬇️ Downloading $dir/rules.md..."
-  curl -s "$REPO_URL/docs/$dir/rules.md" -o ".roo/$dir/rules.md" || echo "❌ Failed to download $dir/rules.md"
-  
-  # 추가 파일 - 특정 디렉토리에서 알려진 중요 파일들 (필요한 만큼 추가)
-  if [ "$dir" = "rules" ]; then
-    echo "⬇️ Downloading $dir/attempt_completion_protocol.md..."
-    curl -s "$REPO_URL/docs/$dir/attempt_completion_protocol.md" -o ".roo/$dir/attempt_completion_protocol.md" || echo "❌ Failed to download $dir/attempt_completion_protocol.md"
-    
-    echo "⬇️ Downloading $dir/subtask_protocol.md..."
-    curl -s "$REPO_URL/docs/$dir/subtask_protocol.md" -o ".roo/$dir/subtask_protocol.md" || echo "❌ Failed to download $dir/subtask_protocol.md"
-  fi
+  echo "⬇️ Fetching file list for $dir..."
+  files=$(curl -s "$GITHUB_API_URL/$dir" | jq -r '.[] | select(.type=="file") | .name')
+  for file in $files; do
+    echo "⬇️ Downloading $dir/$file..."
+    curl -s "$REPO_URL/docs/$dir/$file" -o ".roo/$dir/$file" || echo "❌ Failed to download $dir/$file"
+  done
 done
 
-# docs 디렉토리 내 기타 필요한 파일들을 .roo 루트에 다운로드
+# Download other essential files in docs directory to .roo root
 echo "⬇️ Downloading other essential files..."
 curl -s "$REPO_URL/docs/mcp.md" -o ".roo/mcp.md" || echo "❌ Failed to download mcp.md"
 curl -s "$REPO_URL/docs/mcp.json" -o ".roo/mcp.json" || echo "❌ Failed to download mcp.json"
