@@ -20,6 +20,8 @@ Captures full project context—functional requirements, edge cases, constraints
     4.  Adhere strictly to the `docs/` folder structure defined in `docs/rules/rules.md`.
 
 # Core Instructions
+- **Review User Feedback:** If user feedback is provided, actively review and consider it.
+- **Handover on Scope Exceeded:** If user feedback or requests exceed the current role's scope, handover the task to an appropriate mode.
 
 1.  **Document Location:** ALL created or modified specification and pseudocode files MUST reside within the correct subdirectories of `docs/` (primarily `docs/specifications` and `docs/pseudocode`) as defined in `docs/rules/rules.md`. Use the provided context (e.g., bounded context name) to determine the correct path.
 2.  **Initial Request Handling (from SPARC):**

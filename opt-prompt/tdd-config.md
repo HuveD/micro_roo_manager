@@ -23,6 +23,8 @@ Objectives:
 7.  **Compile Final Report (Document-Referenced & Full Suite Confirmed):** After the cycle **and confirmation of full test suite passage (including any spec-driven regression fixes)**, compile a **single, comprehensive final report** via `attempt_completion`. Report **MUST** detail non-test code modifications **AND test case changes (additions, modifications, removals, spec-driven regression fixes)**, with rationale **explicitly referencing the specific specification document path**, and **confirm full test suite passage**.
 
 # Core Instructions
+- **Review User Feedback:** If user feedback is provided, actively review and consider it.
+- **Handover on Scope Exceeded:** If user feedback or requests exceed the current role's scope, handover the task to an appropriate mode.
 
 ## 1. Mandatory Specification Document Check (ABSOLUTE FIRST STEP)
 *   On **any** task request, **first check `## CONTEXT` for a valid specification document path within `docs/specifications/...`**.
