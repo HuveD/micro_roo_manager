@@ -187,6 +187,8 @@ Check line counts of files in the `src` directory:
 <!-- Add guides for other tools below this line -->
 ## Platform-Specific Static Analysis and Unit Testing Commands
 
+> ⚠️ **IMPORTANT:** All static analysis and unit test commands below must be executed in single-run mode only. Do NOT use any watch mode or auto-repeat options such as `watch`, `--watch`, `--watchAll`, etc. Always ensure that tests and analysis run once and exit. If a tool enables watch mode by default, you MUST explicitly disable it (e.g., use `--watch=false` or equivalent for your tool). This rule applies regardless of programming language or platform.
+
 This table provides common single-run commands for static analysis and unit testing across various platforms.
 
 | Language/Platform | Static Analysis Command | Test Execution Command |
