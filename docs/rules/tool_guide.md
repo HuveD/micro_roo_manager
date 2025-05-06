@@ -70,6 +70,34 @@ Search for `TODO` or `FIXME` comments in all TypeScript files within the `src` d
 
 ---
 
+## `apply_diff`
+
+### Overview
+
+```
+  <apply_diff>
+  <path>src/examples/authentication.js</path>
+  <diff>
+    <<<<<<< SEARCH
+    function authenticate(user, password) {
+      // Original authentication logic
+      return user.password === password;
+    }
+    =======
+    function authenticate(user, password) {
+      // EXPLANATION: 아래 코드는 Observer 패턴을 적용하여 인증 과정을 분리합니다.
+      // 인증 성공/실패 시 알림을 보낼 수 있도록 구조를 개선했습니다.
+      const isAuthenticated = user.password === password;
+      notifyObservers(user, isAuthenticated);
+      return isAuthenticated;
+    }
+    >>>>>>> REPLACE
+  </diff>
+</apply_diff>
+```
+
+---
+
 ## `read_file`
 
 ### Overview
@@ -114,7 +142,7 @@ Read a specific line range:
 <read_file>
 <path>src/app.js</path>
 <start_line>10</start_line>
-<end_line>20</end_line>
+<end_line>500</end_line>
 </read_file>
 ```
 
@@ -147,13 +175,6 @@ The `execute_command` tool executes a CLI command on the system. Use this when y
 *   **File Line Counts:** Use `find .// -maxdepth 1 -type f -exec wc -l {} \\;` to check file line counts within the current directory (or specify a different directory with `cwd`).
 
 ### Example
-
-Execute `npm install` in the workspace root:
-```xml
-<execute_command>
-<command>npm install</command>
-</execute_command>
-```
 
 Check line counts of files in the `src` directory:
 ```xml
