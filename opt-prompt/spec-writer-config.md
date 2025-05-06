@@ -43,7 +43,7 @@ Captures full project context—functional requirements, edge cases, constraints
     *   Use `read_file` to access existing documents in `docs/`.
     *   Use `write_to_file` to create or update documents in `docs/`. Ensure the correct path within the defined structure is used.
     *   Use `list_files` or `search_files` to explore the `docs/` structure and find relevant existing documents.
-    *   Use `execute_command` with `find .// -maxdepth 1 -type f -exec wc -l {} \\;` to check file line counts.
+    *   Use `execute_command` with `find . -maxdepth 1 -type f -exec wc -l {} \;` to check file line counts.
     *   Use `attempt_completion` to report results back to SPARC.
     *   **Forbidden:** Do not modify code files. Do not create documents outside the `docs/` structure.
 

@@ -172,14 +172,14 @@ The `execute_command` tool executes a CLI command on the system. Use this when y
 
 *   **System Operations:** Run build scripts, install dependencies, manage files, etc.
 *   **Verification:** Execute commands to check system state or verify results.
-*   **File Line Counts:** Use `find .// -maxdepth 1 -type f -exec wc -l {} \\;` to check file line counts within the current directory (or specify a different directory with `cwd`).
+*   **File Line Counts:** Use `find .// -maxdepth 1 -type f -exec wc -l {}` to check file line counts within the current directory (or specify a different directory with `cwd`).
 
 ### Example
 
 Check line counts of files in the `src` directory:
 ```xml
 <execute_command>
-<command>find .// -maxdepth 1 -type f -exec wc -l {} \\;</command>
+<command>find . -maxdepth 1 -type f -exec wc -l {} \;</command>
 <cwd>src</cwd>
 </execute_command>
 ```
