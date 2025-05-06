@@ -30,12 +30,6 @@ mkdir -p .roo/rules-architect
 mkdir -p .roo/rules-code
 mkdir -p .roo/rules-orchestrator
 
-# .roo/memory 폴더 생성
-mkdir -p .roo/memory
-
-# .roo/logs 폴더 생성
-mkdir -p .roo/logs
-
 # Copy docs directory structure with all files to .roo
 echo "  ✓ Copying all directories and files from docs to .roo..."
 
@@ -43,9 +37,15 @@ echo "  ✓ Copying all directories and files from docs to .roo..."
 cp -r "$EXTRACTED_DIR/docs/." .roo/
 
 # logs 폴더가 없으면 생성
-if [ ! -d "./logs" ]; then
-  mkdir ./logs
+if [ ! -d "./.roo/logs" ]; then
+  mkdir ./.roo/logs
   echo "  ✓ logs 폴더 생성됨"
+fi
+
+# memory 폴더가 없으면 생성
+if [ ! -d "./.roo/memory" ]; then
+  mkdir ./.roo/memory
+  echo "  ✓ memory 폴더 생성됨"
 fi
 
 # 4. Remove the tmp_micro_manager directory
