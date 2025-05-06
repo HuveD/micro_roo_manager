@@ -30,6 +30,12 @@ mkdir -p .roo/rules-architect
 mkdir -p .roo/rules-code
 mkdir -p .roo/rules-orchestrator
 
+# .roo/memory 폴더 생성
+mkdir -p .roo/memory
+
+# .roo/logs 폴더 생성
+mkdir -p .roo/logs
+
 # Copy docs directory structure with all files to .roo
 echo "  ✓ Copying all directories and files from docs to .roo..."
 
