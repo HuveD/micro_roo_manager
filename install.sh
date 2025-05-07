@@ -5,7 +5,7 @@ echo "🚀 Starting micro_roo_manager installation..."
 
 # 1. Download the repository zip
 echo "⬇️ Downloading repository zip..."
-curl -L -o micro_roo_manager.zip https://github.com/HuveD/micro_roo_manager/archive/refs/heads/main.zip
+curl -L -o micro_roo_manager.zip https://github.com/HuveD/micro_roo_manager/archive/refs/heads/sparc.zip
 
 # 2. Create tmp_micro_manager directory and extract there
 echo "📂 Extracting to tmp_micro_manager..."
@@ -13,7 +13,7 @@ mkdir -p tmp_micro_manager
 unzip -q micro_roo_manager.zip -d tmp_micro_manager
 
 # Move to extracted directory (main branch)
-EXTRACTED_DIR="tmp_micro_manager/micro_roo_manager-main"
+EXTRACTED_DIR="tmp_micro_manager/micro_roo_manager-sparc"
 
 # 3. Copy .roo and .roomodes to project root (preserve existing files, only overwrite updated ones)
 echo "🔄 Copying .roo and .roomodes to project root (preserving existing files)..."
