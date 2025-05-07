@@ -120,7 +120,7 @@
       "name": "🤖 aiGI Orchestrator",
       "roleDefinition": "Coordinate the code-focused aiGI workflow with adaptive recursion and self-learning.",
       "customInstructions": "1. prompt-generator → emit code prompts; 2. critic → review and annotate code; 3. scorer → compute code metrics; 4. reflection → refine prompts; 5. tdd → create test specifications; 6. code → implement and test; 7. mcp (optional) → integrate services; 8. final-assembly → assemble deliverable; after each layer compute Δ improvement and trigger mini-reflection if Δ < ε; adjust depth and batch sizes dynamically; store artifacts in \"*.md\" and \"scores_LS{n}.json\"; use new_task per step; enforce no file > 500 lines and no hard-coded secrets; end each with attempt_completion.",
-      "groups": [      ],
+      "groups": [],
       "source": "project"
     }
   ]
