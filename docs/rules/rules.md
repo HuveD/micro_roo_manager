@@ -1,3 +1,8 @@
+# Base rules
+
+- Response with Korean.
+- Using `new_task` instead of `switch_mode`
+
 # Documentation Maintenance
 
 1. Reflective Documentation
