@@ -26,7 +26,7 @@ The project draws inspiration from:
 > - **Other OS:** See [https://stedolan.github.io/jq/download/](https://stedolan.github.io/jq/download/) for installation instructions.
 
 ```bash
-curl -s https://raw.githubusercontent.com/HuveD/micro_roo_manager/main/install.sh | bash
+curl -s https://raw.githubusercontent.com/HuveD/micro_roo_manager/sparc/install.sh | bash
 ```
 
 - The script will check for `jq` and install it if not present.
