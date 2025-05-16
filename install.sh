@@ -15,15 +15,15 @@ unzip -q micro_roo_manager.zip -d tmp_micro_manager
 # Move to extracted directory (main branch)
 EXTRACTED_DIR="tmp_micro_manager/micro_roo_manager-add"
 
-# 3. Copy .roo and .roomodes to project root (preserve existing files, only overwrite updated ones)
-echo "🔄 Copying .roo and .roomodes to project root (preserving existing files)..."
+# 3. Copy .roo and .roomodes to project root (force overwrite existing files)
+echo "🔄 Copying .roo and .roomodes to project root (overwriting existing files)..."
 
 # Create .roo directory if it doesn't exist
 mkdir -p .roo
 
 # Copy .roomodes file (if exists)
 if [ -f "$EXTRACTED_DIR/.roomodes" ]; then
-  cp "$EXTRACTED_DIR/.roomodes" .
+  cp -f "$EXTRACTED_DIR/.roomodes" .
   echo "  ✓ .roomodes copied"
 fi
 
@@ -34,7 +34,7 @@ echo "  ✓ Copying all directories and files from docs to .roo..."
 for file in "$EXTRACTED_DIR/docs"/*; do
   if [ -f "$file" ]; then
     file_name=$(basename "$file")
-    cp "$file" ".roo/" 2>/dev/null
+    cp -f "$file" ".roo/" 2>/dev/null
     echo "    ✓ Copied: $file_name to .roo/"
   fi
 done
@@ -65,8 +65,8 @@ for src_dir in "$EXTRACTED_DIR/docs"/*; do
         # Create subdirectory if needed
         mkdir -p "$dest_dir_path"
         
-        # Copy the file
-        cp "$file_path" "$dest_file"
+        # Copy the file with force overwrite
+        cp -f "$file_path" "$dest_file"
         echo "    ✓ Copied: $dir_name/$rel_path"
       done
     fi
