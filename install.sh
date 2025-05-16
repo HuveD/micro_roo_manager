@@ -1,19 +1,19 @@
 #!/bin/bash
 
 # micro_roo_manager installation script
-echo "🚀 Starting micro_roo_manager installation..."
+echo "🚀 Starting ai_driven_development installation..."
 
 # 1. Download the repository zip
 echo "⬇️ Downloading repository zip..."
-curl -L -o micro_roo_manager.zip https://github.com/HuveD/micro_roo_manager/archive/refs/heads/sparc.zip
+curl -L -o ai_driven_development.zip https://github.com/HuveD/micro_roo_manager/archive/refs/heads/add.zip
 
 # 2. Create tmp_micro_manager directory and extract there
 echo "📂 Extracting to tmp_micro_manager..."
 mkdir -p tmp_micro_manager
-unzip -q micro_roo_manager.zip -d tmp_micro_manager
+unzip -q ai_driven_development.zip -d tmp_micro_manager
 
 # Move to extracted directory (main branch)
-EXTRACTED_DIR="tmp_micro_manager/micro_roo_manager-sparc"
+EXTRACTED_DIR="tmp_micro_manager/ai_driven_development"
 
 # 3. Copy .roo and .roomodes to project root (preserve existing files, only overwrite updated ones)
 echo "🔄 Copying .roo and .roomodes to project root (preserving existing files)..."
@@ -78,7 +78,7 @@ echo "🧹 Cleaning up temporary files..."
 rm -rf tmp_micro_manager
 
 # 5. Remove the zip file
-rm -f micro_roo_manager.zip
+rm -f ai_driven_development.zip
 
 echo "✅ Installation completed!"
 echo "🔧 .roomodes file and .roo directory have been successfully updated."
