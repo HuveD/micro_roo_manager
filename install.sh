@@ -5,7 +5,9 @@ echo "🚀 Starting micro_roo_manager installation..."
 
 # 1. Download the repository zip
 echo "⬇️ Downloading repository zip..."
-curl -L -o micro_roo_manager.zip https://github.com/HuveD/micro_roo_manager/archive/refs/heads/add.zip
+# Add cache busting parameter with current timestamp
+TIMESTAMP=$(date +%s)
+curl -L -o micro_roo_manager.zip "https://github.com/HuveD/micro_roo_manager/archive/refs/heads/add.zip?_cb=$TIMESTAMP"
 
 # 2. Create tmp_micro_manager directory and extract there
 echo "📂 Extracting to tmp_micro_manager..."
@@ -14,6 +16,12 @@ unzip -q micro_roo_manager.zip -d tmp_micro_manager
 
 # Move to extracted directory (main branch)
 EXTRACTED_DIR="tmp_micro_manager/micro_roo_manager-add"
+
+# Display commit information if git info is available
+if [ -f "$EXTRACTED_DIR/.git/HEAD" ]; then
+  echo "📋 Repository information:"
+  cat "$EXTRACTED_DIR/.git/HEAD"
+fi
 
 # 3. Copy .roo and .roomodes to project root (force overwrite existing files)
 echo "🔄 Copying .roo and .roomodes to project root (overwriting existing files)..."
