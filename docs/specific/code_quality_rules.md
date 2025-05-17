@@ -1,5 +1,10 @@
 # AI-Optimized Code Quality Guidelines
 
+## Document Organization Principles
+*   **File Size Limitation:** This guideline document, and any related documents forming part of this rule set, MUST be kept under 500 lines per file to maintain readability and manageability.
+*   **Single Responsibility for Guideline Files:** If this overall set of guidelines becomes too large or covers too many disparate topics to fit within the line limit of a single file, it MUST be split into multiple, smaller files. Each such file MUST address a distinct, cohesive area of concern (e.g., "Method Design Rules," "Conditional Logic Rules"), adhering to the Single Responsibility Principle for document organization.
+*   **Structured Management of Guideline Assets:** All components related to these guidelines (e.g., scripts for validation, configuration files, individual guideline documents if split) MUST be organized with high readability. Files, folders, and functional units (like functions or classes within associated scripts) MUST adhere to the Single Responsibility Principle.
+
 ## Core Principles
 *   **Strict Adherence:** These guidelines are foundational for maintaining high-quality, maintainable, and understandable code.
 *   **AI Assistance Focus:** This document also guides AI tools in providing feedback and refactoring suggestions based on these rules.
