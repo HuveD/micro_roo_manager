@@ -53,6 +53,27 @@ fi
 # 각 모드 폴더에서 필요한 문서를 .roo 폴더로 복사
 echo "  ✓ 각 모드 규칙 문서를 .roo 폴더로 복사 중..."
 
+# rules 폴더 복사
+if [ -d "$EXTRACTED_DIR/docs/rules" ]; then
+  echo "  ✓ rules 폴더 복사 중..."
+  dest_dir=".roo/rules"
+  mkdir -p "$dest_dir"
+  
+  find "$EXTRACTED_DIR/docs/rules" -type f -print | while read file_path; do
+    rel_path="${file_path#$EXTRACTED_DIR/docs/rules/}"
+    
+    dest_file="$dest_dir/$rel_path"
+    dest_dir_path=$(dirname "$dest_file")
+    
+    # Create subdirectory if needed
+    mkdir -p "$dest_dir_path"
+    
+    # Copy the file with force overwrite
+    cp -f "$file_path" "$dest_file"
+    echo "    ✓ Copied: rules/$rel_path"
+  done
+fi
+
 # 모든 rules-* 디렉토리를 복사
 for src_dir in "$EXTRACTED_DIR/docs/rules-"*; do
   if [ -d "$src_dir" ]; then
