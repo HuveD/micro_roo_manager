@@ -18,7 +18,13 @@ EXTRACTED_DIR="tmp_micro_manager/micro_roo_manager-add"
 # 3. Copy .roo and .roomodes to project root (force overwrite existing files)
 echo "🔄 Copying .roo and .roomodes to project root (overwriting existing files)..."
 
-# Create .roo directory if it doesn't exist
+# Remove existing .roo directory if it exists
+if [ -d ".roo" ]; then
+  echo "  ✓ Removing existing .roo directory..."
+  rm -rf .roo
+fi
+
+# Create .roo directory
 mkdir -p .roo
 
 # Copy .roomodes file (if exists)
