@@ -22,8 +22,18 @@ EXTRACTED_DIR="tmp_micro_manager/micro_roo_manager-add"
 echo "📋 Verifying extracted contents:"
 find "$EXTRACTED_DIR/docs" -type f | sort
 
-# 3. Copy .roo and .roomodes to project root (force overwrite existing files)
-echo "🔄 Copying .roo and .roomodes to project root (overwriting existing files)..."
+# 3. 다운로드한 임시 디렉토리 내에서 공통 문서 동기화 진행
+echo "🔄 공통 문서를 각 모드 폴더로 복사하는 중..."
+if [ -f "$EXTRACTED_DIR/scripts/sync_common_docs.sh" ]; then
+  # 임시 폴더 내의 스크립트 실행 (기본 경로를 EXTRACTED_DIR로 설정)
+  chmod +x "$EXTRACTED_DIR/scripts/sync_common_docs.sh"
+  "$EXTRACTED_DIR/scripts/sync_common_docs.sh" "$EXTRACTED_DIR"
+else
+  echo "⚠️ 임시 폴더에 동기화 스크립트가 없습니다."
+fi
+
+# 4. .roo 디렉토리 설정
+echo "🔄 Setting up .roo directory..."
 
 # Remove existing .roo directory if it exists
 if [ -d ".roo" ]; then
@@ -40,26 +50,11 @@ if [ -f "$EXTRACTED_DIR/.roomodes" ]; then
   echo "  ✓ .roomodes copied"
 fi
 
-# Copy docs directory structure with all files to .roo
-echo "  ✓ Copying all directories and files from docs to .roo..."
+# 각 모드 폴더에서 필요한 문서를 .roo 폴더로 복사
+echo "  ✓ 각 모드 규칙 문서를 .roo 폴더로 복사 중..."
 
-# First, copy top-level files in docs directly to .roo root
-for file in "$EXTRACTED_DIR/docs"/*; do
-  if [ -f "$file" ]; then
-    file_name=$(basename "$file")
-    cp -f "$file" ".roo/" 2>/dev/null
-    echo "    ✓ Copied: $file_name to .roo/"
-  fi
-done
-
-# Copy scripts directory
-echo "  ✓ Copying scripts directory..."
-mkdir -p scripts
-cp -f "$EXTRACTED_DIR/scripts/sync_common_docs.sh" "scripts/" 2>/dev/null
-chmod +x scripts/sync_common_docs.sh
-
-# Then copy all subdirectories from docs to .roo with their complete structure
-for src_dir in "$EXTRACTED_DIR/docs"/*; do
+# 모든 rules-* 디렉토리를 복사
+for src_dir in "$EXTRACTED_DIR/docs/rules-"*; do
   if [ -d "$src_dir" ]; then
     dir_name=$(basename "$src_dir")
     dest_dir=".roo/$dir_name"
@@ -68,52 +63,8 @@ for src_dir in "$EXTRACTED_DIR/docs"/*; do
     mkdir -p "$dest_dir"
     
     # Find and copy all files in the source directory with their subdirectory structure
-    if [ -d "$src_dir" ]; then
-      # Copy using find to preserve subdirectory structure
-      find "$src_dir" -type f -print | while read file_path; do
-        rel_path="${file_path#$src_dir/}"
-        
-        # If the relative path is empty, it's a file directly in src_dir
-        if [ -z "$rel_path" ]; then
-          rel_path=$(basename "$file_path")
-        fi
-        
-        dest_file="$dest_dir/$rel_path"
-        dest_dir_path=$(dirname "$dest_file")
-        
-        # Create subdirectory if needed
-        mkdir -p "$dest_dir_path"
-        
-        # Copy the file with force overwrite
-        cp -f "$file_path" "$dest_file"
-        echo "    ✓ Copied: $dir_name/$rel_path"
-      done
-    fi
-  fi
-done
-
-# 4. 공통 문서 동기화 수행 (docs/common의 문서를 각 역할별 폴더로 복사)
-echo "🔄 동기화: 공통 문서를 각 모드 폴더로 동기화하는 중..."
-if [ -f "scripts/sync_common_docs.sh" ]; then
-  ./scripts/sync_common_docs.sh
-  echo "  ✓ 공통 문서 동기화 완료"
-fi
-
-# 5. 다운로드한 .roo 디렉토리에도 동기화된 문서 복사
-echo "  ✓ .roo 디렉토리에 동기화된 문서 복사 중..."
-for src_dir in "docs"/*; do
-  if [ -d "$src_dir" ] && [ "$(basename "$src_dir")" != "common" ]; then
-    dir_name=$(basename "$src_dir")
-    dest_dir=".roo/$dir_name"
-    
-    # Find and copy all files in the source directory
     find "$src_dir" -type f -print | while read file_path; do
       rel_path="${file_path#$src_dir/}"
-      
-      # If the relative path is empty, it's a file directly in src_dir
-      if [ -z "$rel_path" ]; then
-        rel_path=$(basename "$file_path")
-      fi
       
       dest_file="$dest_dir/$rel_path"
       dest_dir_path=$(dirname "$dest_file")
@@ -123,15 +74,16 @@ for src_dir in "docs"/*; do
       
       # Copy the file with force overwrite
       cp -f "$file_path" "$dest_file"
+      echo "    ✓ Copied: $dir_name/$rel_path"
     done
   fi
 done
 
-# 6. Remove the tmp_micro_manager directory
+# 5. Remove the tmp_micro_manager directory
 echo "🧹 Cleaning up temporary files..."
 rm -rf tmp_micro_manager
 
-# 7. Remove the zip file
+# 6. Remove the zip file
 rm -f micro_roo_manager.zip
 
 echo "✅ Installation completed!"
