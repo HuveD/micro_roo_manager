@@ -7,6 +7,7 @@ echo "🚀 Starting micro_roo_manager installation..."
 echo "⬇️ Downloading repository zip..."
 # Add cache busting parameter with current timestamp
 TIMESTAMP=$(date +%s)
+# Direct download from add branch
 curl -L -o micro_roo_manager.zip "https://github.com/HuveD/micro_roo_manager/archive/refs/heads/add.zip?_cb=$TIMESTAMP"
 
 # 2. Create tmp_micro_manager directory and extract there
@@ -17,15 +18,14 @@ unzip -q micro_roo_manager.zip -d tmp_micro_manager
 # Move to extracted directory (add branch)
 EXTRACTED_DIR="tmp_micro_manager/micro_roo_manager-add"
 
-# Display commit information if git info is available
-if [ -f "$EXTRACTED_DIR/.git/HEAD" ]; then
-  echo "📋 Repository information:"
-  cat "$EXTRACTED_DIR/.git/HEAD"
-fi
-
 # Debug: List the extracted docs directory structure to verify content
 echo "📋 Verifying extracted contents:"
 find "$EXTRACTED_DIR/docs" -type f | sort
+
+# Remove context7_guide.md files explicitly before copying
+echo "🧹 Removing unwanted context7_guide.md files..."
+find "$EXTRACTED_DIR/docs" -name "context7_guide.md" -exec rm -f {} \;
+echo "✓ Removal completed"
 
 # 3. Copy .roo and .roomodes to project root (force overwrite existing files)
 echo "🔄 Copying .roo and .roomodes to project root (overwriting existing files)..."
