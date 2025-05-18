@@ -38,8 +38,7 @@
 - `A --"Link text (optional)"--> B`
 - `A -->|"Alternative link text"| B`
 
-## 4. Comments
-- Use `%%` for comments. They are ignored by the parser. Example: `%% This is a comment`
+## 4. Do not Use Comments kekword(%%)
 
 # Output Requirements
 - Provide **ONLY** the complete, raw Mermaid code block.
