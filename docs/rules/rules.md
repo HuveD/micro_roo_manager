@@ -54,6 +54,9 @@ The `apply_diff` tool is used for precise code modifications. It requires strict
 
 ### Secondary Tools
 
+-   **`write_file`**: Overwrites the entire file with new content.
+    *   *Purpose:* Use when you need to completely replace all contents of a file. The existing content will be discarded and replaced with the specified new content. If `apply_diff` fails or is unsuitable, use `write_file` to overwrite the entire file as a fallback.
+    *   *Usage:* You must specify both the file path and the full new content to write.
 -   **`read_file`**: Reads content from a specified file.
     *   *Usage:* To retrieve the current content of a file for review or as a basis for other operations.
 -   **`insert_content`**: Inserts new content into a file.
