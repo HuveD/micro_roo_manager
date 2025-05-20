@@ -55,16 +55,18 @@ The `apply_diff` tool is used for precise code modifications. It requires strict
 ### Secondary Tools
 
 -   **`write_file`**: Overwrites the entire file with new content.
-    *   *Purpose:* Use when you need to completely replace all contents of a file. The existing content will be discarded and replaced with the specified new content. If `apply_diff` fails or is unsuitable, use `write_file` to overwrite the entire file as a fallback.
-    *   *Usage:* You must specify both the file path and the full new content to write.
+    *   *Purpose:* Use when you need to completely replace all contents of a file. The existing content will be discarded and replaced with the specified new content. If any file writing operation such as `apply_diff`, `insert_content`, or `search_and_replace` fails or is unsuitable, you MUST always use `write_file` as the final fallback to ensure the file is updated correctly.
+    *   *Usage:* Specify both the file path and the full new content to write.
 -   **`read_file`**: Reads content from a specified file.
     *   *Usage:* To retrieve the current content of a file for review or as a basis for other operations.
 -   **`insert_content`**: Inserts new content into a file.
     *   *Usage:* Typically for adding documentation, new code sections, or other content where a full search-and-replace (like `apply_diff`) is not required.
     *   Requires specifying the insertion point (e.g., line number or after a specific marker) and the content to insert.
+    *   *Important:* If this operation fails or is unsuitable, you MUST use `write_file` to update the file.
 -   **`execute_command`**: Executes shell commands.
     *   *Usage:* Primarily for tasks like testing API connectivity, running build scripts, or validating integration setups.
     *   Exercise caution with commands that modify the file system or system state.
 -   **`search_and_replace`**: Performs simple text search and replace operations within a file.
     *   **Usage Precaution:** Use only when `apply_diff` is unsuitable, typically for very simple, non-structural text changes or when line numbers are unreliable.
     *   **Parameters:** **MUST** include both the search string and the replacement string.
+    *   *Important:* If this operation fails or is unsuitable, you MUST use `write_file` to update the file.
