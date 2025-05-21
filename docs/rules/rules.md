@@ -43,26 +43,26 @@ For precise code modifications with strict formatting requirements.
     *   Use the exact markers: `<<<<<<< SEARCH`, `-------`, `=======`, `>>>>>>> REPLACE`.
 
 **Example for `apply_diff`:**
-```xml
-<apply_diff>
-  <path>file/path.js</path>
-  <diff>
-<<<<<<< SEARCH
-:start_line:42
--------
-function example() {
-  // Complete code block to replace
-  return result;
-}
-=======
-function example() {
-  // New implementation
-  return updatedResult;
-}
->>>>>>> REPLACE
-  </diff>
-</apply_diff>
-```
+  ```xml
+  <apply_diff>
+    <path>file/path.js</path>
+    <diff>
+  <<<<<<< SEARCH
+  :start_line:42
+  -------
+  function example() {
+    // Complete code block to replace
+    return result;
+  }
+  =======
+  function example() {
+    // New implementation
+    return updatedResult;
+  }
+  >>>>>>> REPLACE
+    </diff>
+  </apply_diff>
+  ```
 
 **Failure Handling for `apply_diff`:**
 *   If `apply_diff` fails to modify the file correctly, **DO NOT** attempt `apply_diff` again. Proceed according to the "File Modification Strategy": first try `insert_content` or `search_and_replace` if appropriate for the task and if they haven't failed already for this modification. If those also fail or are not appropriate, **IMMEDIATELY** resort to `write_file`.
