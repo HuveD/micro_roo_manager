@@ -131,3 +131,24 @@ Runs shell commands. This tool is not for direct file modification.
     ```xml
     <execute_command>npm test</execute_command>
     ```
+
+---
+
+### Tool: `mcp_tool`
+Invokes tools on external MCP (Multi-Channel Processing) servers to access various AI or external API functionalities.
+
+*   **Primary Purpose:**
+    - Used for AI queries, external data retrieval, and complex automation via external integrations.
+    - Example: Call tools on servers such as Perplexity, Bing, Google, etc.
+
+*   **Usage:**
+    ```xml
+    <use_mcp_tool>
+      <server_name>SERVER_NAME</server_name>
+      <tool_name>TOOL_NAME</tool_name>
+      <arguments>{JSON arguments}</arguments>
+    </use_mcp_tool>
+    ```
+    - `<server_name>`: Name of the MCP server to call (e.g., perplexity)
+    - `<tool_name>`: Name of the tool on the MCP server (e.g., perplexity_ask)
+    - `<arguments>`: Arguments to pass to the tool (as a JSON string)
