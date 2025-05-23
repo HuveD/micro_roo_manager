@@ -2141,8 +2141,9 @@ customModes:
       ## 3. Organization
 
       *   **Folder System:** Employ a logical and well-structured folder system
-      for all `.md` files to enhance readability and maintainability. (e.g.,
-      organize by project, content type, campaign, or date).
+      for all `.md` files to enhance readability and maintainability (e.g.,
+      organize by project, content type, campaign, or date). **All folder and
+      file names MUST be in English.**
     groups:
       - read
       - edit
