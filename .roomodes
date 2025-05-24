@@ -2145,9 +2145,6 @@ customModes:
       optimized task request.
     groups:
       - read
-      - browser
-      - command
-      - mcp
       - - edit
         - fileRegex: \agent_docs/requirements/.*\.md$
           description: Requirements documents (.md) in agent_docs/requirements/
