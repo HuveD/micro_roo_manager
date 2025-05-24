@@ -56,16 +56,22 @@ echo "  ✓ 각 모드 규칙 문서를 .roo 폴더로 복사 중 (기존 파일
 echo "  ✓ rules 폴더 복사 중..."
 if [ -d "$EXTRACTED_DIR/docs/rules" ]; then
   mkdir -p ".roo/rules"
-  cp -rf "$EXTRACTED_DIR/docs/rules/"* ".roo/rules/"
   
-  # 복사된 파일 목록 출력 (기존 파일 여부 확인)
+  # 파일을 하나씩 확인하면서 복사
   find "$EXTRACTED_DIR/docs/rules" -type f | while read src_file; do
     rel_path="${src_file#$EXTRACTED_DIR/docs/rules/}"
     dest_file=".roo/rules/$rel_path"
+    dest_dir_path=$(dirname "$dest_file")
     
+    # 대상 디렉토리 생성
+    mkdir -p "$dest_dir_path"
+    
+    # 파일 존재 여부 확인 후 복사
     if [ -f "$dest_file" ]; then
+      cp -f "$src_file" "$dest_file"
       echo "    ⟳ Updated: rules/$rel_path"
     else
+      cp -f "$src_file" "$dest_file"
       echo "    ✓ Added: rules/$rel_path"
     fi
   done
