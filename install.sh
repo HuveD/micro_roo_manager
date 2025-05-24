@@ -57,8 +57,8 @@ echo "  ✓ rules 폴더 복사 중..."
 if [ -d "$EXTRACTED_DIR/docs/rules" ]; then
   mkdir -p ".roo/rules"
   
-  # 파일을 하나씩 확인하면서 복사
-  find "$EXTRACTED_DIR/docs/rules" -type f | while read src_file; do
+  # 파일을 하나씩 확인하면서 복사 (for loop 사용)
+  for src_file in $(find "$EXTRACTED_DIR/docs/rules" -type f); do
     rel_path="${src_file#$EXTRACTED_DIR/docs/rules/}"
     dest_file=".roo/rules/$rel_path"
     dest_dir_path=$(dirname "$dest_file")
@@ -66,12 +66,13 @@ if [ -d "$EXTRACTED_DIR/docs/rules" ]; then
     # 대상 디렉토리 생성
     mkdir -p "$dest_dir_path"
     
-    # 파일 존재 여부 확인 후 복사
+    # 파일 존재 여부 확인 후 확실한 덮어쓰기
     if [ -f "$dest_file" ]; then
-      cp -f "$src_file" "$dest_file"
+      rm -f "$dest_file"
+      cp "$src_file" "$dest_file"
       echo "    ⟳ Updated: rules/$rel_path"
     else
-      cp -f "$src_file" "$dest_file"
+      cp "$src_file" "$dest_file"
       echo "    ✓ Added: rules/$rel_path"
     fi
   done
@@ -86,8 +87,8 @@ for src_dir in "$EXTRACTED_DIR/docs/rules-"*; do
     # Create destination directory
     mkdir -p "$dest_dir"
     
-    # Find and copy all files in the source directory with their subdirectory structure
-    find "$src_dir" -type f -print | while read file_path; do
+    # Find and copy all files in the source directory with their subdirectory structure (for loop 사용)
+    for file_path in $(find "$src_dir" -type f -print); do
       rel_path="${file_path#$src_dir/}"
       
       dest_file="$dest_dir/$rel_path"
@@ -96,12 +97,13 @@ for src_dir in "$EXTRACTED_DIR/docs/rules-"*; do
       # Create subdirectory if needed
       mkdir -p "$dest_dir_path"
       
-      # Check if file exists and copy with appropriate message
+      # Check if file exists and copy with certain overwrite
       if [ -f "$dest_file" ]; then
-        cp -f "$file_path" "$dest_file"
+        rm -f "$dest_file"
+        cp "$file_path" "$dest_file"
         echo "    ⟳ Updated: $dir_name/$rel_path"
       else
-        cp -f "$file_path" "$dest_file"
+        cp "$file_path" "$dest_file"
         echo "    ✓ Added: $dir_name/$rel_path"
       fi
     done
