@@ -35,14 +35,13 @@ fi
 # 4. .roo 디렉토리 설정
 echo "🔄 Setting up .roo directory..."
 
-# Remove existing .roo directory if it exists
-if [ -d ".roo" ]; then
-  echo "  ✓ Removing existing .roo directory..."
-  rm -rf .roo
+# Create .roo directory if it doesn't exist (preserve existing content)
+if [ ! -d ".roo" ]; then
+  echo "  ✓ Creating new .roo directory..."
+  mkdir -p .roo
+else
+  echo "  ✓ .roo directory exists, preserving existing files..."
 fi
-
-# Create .roo directory
-mkdir -p .roo
 
 # Copy .roomodes file (if exists)
 if [ -f "$EXTRACTED_DIR/.roomodes" ]; then
@@ -50,8 +49,8 @@ if [ -f "$EXTRACTED_DIR/.roomodes" ]; then
   echo "  ✓ .roomodes copied"
 fi
 
-# 각 모드 폴더에서 필요한 문서를 .roo 폴더로 복사
-echo "  ✓ 각 모드 규칙 문서를 .roo 폴더로 복사 중..."
+# 각 모드 폴더에서 필요한 문서를 .roo 폴더로 복사 (기존 파일 보존, 중복 파일만 덮어쓰기)
+echo "  ✓ 각 모드 규칙 문서를 .roo 폴더로 복사 중 (기존 파일 보존)..."
 
 # rules 폴더 복사 (plain rules 폴더)
 echo "  ✓ rules 폴더 복사 중..."
@@ -59,9 +58,16 @@ if [ -d "$EXTRACTED_DIR/docs/rules" ]; then
   mkdir -p ".roo/rules"
   cp -rf "$EXTRACTED_DIR/docs/rules/"* ".roo/rules/"
   
-  # 복사된 파일 목록 출력
-  find ".roo/rules" -type f | while read file_path; do
-    echo "    ✓ Copied: $(basename "$(dirname "$file_path")")/$(basename "$file_path")"
+  # 복사된 파일 목록 출력 (기존 파일 여부 확인)
+  find "$EXTRACTED_DIR/docs/rules" -type f | while read src_file; do
+    rel_path="${src_file#$EXTRACTED_DIR/docs/rules/}"
+    dest_file=".roo/rules/$rel_path"
+    
+    if [ -f "$dest_file" ]; then
+      echo "    ⟳ Updated: rules/$rel_path"
+    else
+      echo "    ✓ Added: rules/$rel_path"
+    fi
   done
 fi
 
@@ -84,9 +90,14 @@ for src_dir in "$EXTRACTED_DIR/docs/rules-"*; do
       # Create subdirectory if needed
       mkdir -p "$dest_dir_path"
       
-      # Copy the file with force overwrite
-      cp -f "$file_path" "$dest_file"
-      echo "    ✓ Copied: $dir_name/$rel_path"
+      # Check if file exists and copy with appropriate message
+      if [ -f "$dest_file" ]; then
+        cp -f "$file_path" "$dest_file"
+        echo "    ⟳ Updated: $dir_name/$rel_path"
+      else
+        cp -f "$file_path" "$dest_file"
+        echo "    ✓ Added: $dir_name/$rel_path"
+      fi
     done
   fi
 done
@@ -100,3 +111,4 @@ rm -f micro_roo_manager.zip
 
 echo "✅ Installation completed!"
 echo "🔧 .roomodes file and .roo directory have been successfully updated."
+echo "📁 기존 개별 rules 파일들은 보존되었고, 중복 파일들은 최신 버전으로 업데이트되었습니다."
