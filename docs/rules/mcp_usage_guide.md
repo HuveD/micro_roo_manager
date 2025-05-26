@@ -11,11 +11,14 @@
     *   **Primary Tool:** `context7` (often mandatory).
 *   **For real-time web information (news, trends, current events, sourced facts):**
     *   **Primary Tool:** `perplexity`.
+*   **For in-depth information from specific websites or structured content extraction:**
+    *   **Primary Tool:** `firecrawl`.
 *   **For maintaining conversational context, personalization, and remembering user-specific information across interactions:**
     *   **Supporting Tool:** `mem0` (used in conjunction with other tools or general response generation).
 *   **If internal knowledge is suspect for any query:**
     *   Consider `context7` for technical knowledge gaps.
     *   Consider `perplexity` for general/web knowledge gaps.
+    *   Consider `firecrawl` for accuracy/freshness gaps regarding specific website information.
 
 ## 2. MCP Tool Usage Priority
 
@@ -25,11 +28,15 @@
 
 2.  **`perplexity` (Priority for Real-Time & Sourced Web Information):**
     *   **Purpose:** Accesses and synthesizes real-time web information with sources.
-    *   **When:** Queries requiring current events, latest information, trends, or facts needing web verification, where `context7` is not applicable.
+    *   **When:** Queries requiring current events, latest information, trends, or facts needing web verification, where `context7` is not applicable and general web search is sufficient.
 
-3.  **`mem0` (Contextual & Personalization Layer):**
+3.  **`firecrawl` (Priority for Targeted Web Content Extraction & Structuring):**
+    *   **Purpose:** Directly extracts detailed or structured information from specific websites, providing it in an LLM-friendly format.
+    *   **When:** General search results from `perplexity` are insufficient, and specific website content (full page, specific data patterns like product lists, comments) needs to be fetched, or a URL's content needs accurate Markdown conversion.
+
+4.  **`mem0` (Contextual & Personalization Layer):**
     *   **Purpose:** Enables stateful, context-aware interactions by remembering prior user interactions.
-    *   **When:** Need to maintain conversational context, recall user preferences, or personalize responses. Supports other tools and general conversation; not a primary information retrieval tool like `context7` or `perplexity`.
+    *   **When:** Need to maintain conversational context, recall user preferences, or personalize responses. Supports other tools and general conversation; not a primary information retrieval tool like `context7`, `perplexity`, or `firecrawl`.
 
 ---
 
@@ -63,12 +70,26 @@ You **SHOULD** use `perplexity` when the query requires:
 
 ---
 
-## 5. `mem0` MCP: Contextual Memory & Personalization
+## 5. `firecrawl` MCP: Targeted Web Content Extraction & Structuring
 
 ### 5.1. Core Objective
+To directly extract detailed content from specific websites or URLs and transform it into structured data (e.g., Markdown) that an LLM can effectively analyze and utilize.
+
+### 5.2. When to Use `firecrawl`
+You **SHOULD** consider using `firecrawl` when:
+*   Information deeper or more specific to a particular website is required than what `perplexity` (general web search) can provide.
+*   Full text, specific HTML elements, or structured data needs to be extracted from one or more specific URLs (e.g., article bodies, product descriptions, lists of user comments).
+*   A webpage needs to be converted into a clean, LLM-friendly Markdown format.
+*   The latest information must be fetched from external documentation sites not managed internally (e.g., partner API documentation), especially when `context7` is not applicable (e.g., for non-code, general documentation).
+
+---
+
+## 6. `mem0` MCP: Contextual Memory & Personalization
+
+### 6.1. Core Objective
 To enable **stateful, context-aware, and personalized interactions** by allowing the AI to remember and recall information from current or previous interactions.
 
-### 5.2. When to Utilize `mem0`
+### 6.2. When to Utilize `mem0`
 Utilize `mem0` to:
 *   Maintain conversational context and coherence across multiple turns.
 *   Remember and recall user preferences or key information stated by the user.
