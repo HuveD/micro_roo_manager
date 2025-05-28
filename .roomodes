@@ -2061,7 +2061,7 @@ customModes:
       "Request Document" **MUST** be saved as a Markdown file using the
       `write_file` tool. Your terminal action for any given user request is to
       **return the file path** of this saved document (e.g.,
-      `agent_docs/spec/your-document-title.md`).
+      `agent_docs/requirements/your_document_title.md`).
 
 
       # Core Workflow
@@ -2086,13 +2086,21 @@ customModes:
       5.  **Generate Filename:** Based on the "Request Document's" H1 title
       (specifically, the descriptive part after "Request Document: "), create a
       `generated_filename`.
-          *   Convert this descriptive title to kebab-case: all lowercase, spaces replaced with hyphens (`-`).
-          *   Remove any characters that are not alphanumeric or hyphens.
+          *   Take the descriptive part of the title.
+          *   Convert it to lowercase.
+          *   Replace all spaces and hyphens (`-`) with underscores (`_`).
+          *   Remove any characters that are not English lowercase letters (a-z), numbers (0-9), or underscores (`_`).
+          *   Ensure the filename is a valid snake_case string (e.g., no leading/trailing underscores, no multiple consecutive underscores - though the previous rules should largely handle this, a final cleanup might be needed if edge cases produce them). If the process results in an empty string or only underscores, use "untitled_request" as a base.
           *   Append `.md` to this string.
-          *   Example: If H1 is `# Request Document: Analyze Q3 Sales Data & Projections`, the descriptive part is "Analyze Q3 Sales Data & Projections". The `generated_filename` will be `analyze-q3-sales-data-projections.md`.
+          *   Example: If H1 is `# Request Document: Analyze Q3 Sales Data & Projections!`, the descriptive part is "Analyze Q3 Sales Data & Projections!".
+              1.  Lowercase: "analyze q3 sales data & projections!"
+              2.  Replace spaces/hyphens: "analyze_q3_sales_data_&_projections!"
+              3.  Remove non-alphanumeric (a-z, 0-9) or underscore: "analyze_q3_sales_data_projections"
+              The `generated_filename` will be `analyze_q3_sales_data_projections.md`.
       6.  **Construct Full File Path:** Create the full `file_path` by
-      prepending the directory `agent_docs/spec/` to the `generated_filename`.
-          *   Example: `agent_docs/spec/analyze-q3-sales-data-projections.md`.
+      prepending the directory `agent_docs/requirements/` to the
+      `generated_filename`.
+          *   Example: `agent_docs/requirements/analyze_q3_sales_data_projections.md`.
       7.  **Save Document to File:** Use the `write_file` tool. Provide the
       `file_path` (constructed in Step 6) as the destination path and the
       `markdown_content` (the full Markdown text of the "Request Document" from
@@ -2100,8 +2108,8 @@ customModes:
       returning the file path.
 
       8.  **Output File Path:** Return the full `file_path` string (e.g.,
-      `agent_docs/spec/analyze-q3-sales-data-projections.md`) as your final
-      response.
+      `agent_docs/requirements/analyze_q3_sales_data_projections.md`) as your
+      final response.
 
 
       # Request Document Specifications
@@ -2246,10 +2254,10 @@ customModes:
       # Final Output
 
       Your final response **IS** the file path string (e.g.,
-      `agent_docs/spec/descriptive-title-of-the-request.md`) of the saved
-      "Request Document". Do not add any conversational fluff, introductory, or
-      concluding messages before or after presenting the file path. The file
-      path string itself is the entire response.
+      `agent_docs/requirements/descriptive_title_of_the_request.md`) of the
+      saved "Request Document". Do not add any conversational fluff,
+      introductory, or concluding messages before or after presenting the file
+      path. The file path string itself is the entire response.
     groups:
       - read
       - mcp
