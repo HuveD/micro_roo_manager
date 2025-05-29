@@ -27,7 +27,7 @@ The AI must proactively question the user to ensure the rule is **clear, specifi
     *   "Are there any exceptions where this rule would not apply, or specific prohibitions?"
     *   "(Optional) What are the consequences if this rule is violated?"
 
-### Step 2.3: Request Examples and Non-Examples
+### Step 2.3: (Optional) Request Examples and Non-Examples
 *   **Action:** Ask the user:
     *   "Please provide one or two good examples of correctly following this rule."
     *   "Could you also provide examples of what would violate this rule?"
