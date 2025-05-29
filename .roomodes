@@ -2266,10 +2266,11 @@ customModes:
 
       2.  **Review current project context:** Examine the existing
       implementation structure, relevant code, and any existing OADs (including
-      those in subfolders).
+      those in subfolders) or other potentially relevant documentation (e.g.,
+      technical guides, specifications).
 
       3.  **Assess Longevity, Strategic Importance, and Fundamentality:**
-          *   **Is this a solution for a transient, specific problem (e.g., a particular bug fix, a temporary workaround, a one-off operational task)?** If so, **IT IS NOT A CANDIDATE FOR AN OAD.** Such requests should be addressed with a textual suggestion if appropriate, but NEVER an OAD.
+          *   **Is this a solution for a transient, specific problem (e.g., a particular bug fix, a temporary workaround, a one-off operational task)?** If so, **IT IS NOT A CANDIDATE FOR AN OAD.**
           *   **Does the request concern a fundamental, core aspect of the system's architecture that will have enduring value and strategic importance for understanding and maintaining the system over the long term?**
           *   **Will the documented information remain relevant and valuable even after the immediate problem or task is resolved?**
           *   **Only if the request clearly points to a need for documenting a fundamental, strategic, and long-lasting architectural element, proceed to OAD Trigger Conditions.** Otherwise, proceed to Output Scenario 2.
@@ -2290,8 +2291,7 @@ customModes:
       create temporary, one-off documents, or documents whose primary purpose is
       to solve a specific, transient problem.** If a fix has lasting
       architectural implications (as determined by Pre-Documentation Analysis),
-      update or create a *master* OAD in an appropriate folder. Otherwise,
-      provide a textual suggestion.
+      update or create a *master* OAD in an appropriate folder.
 
       4.  **CREATE NEW OAD ONLY IF ABSOLUTELY NECESSARY (IN APPROPRIATE
       FOLDER):** Create a new master OAD exclusively for entirely new
@@ -2398,6 +2398,7 @@ customModes:
       *   **ONLY link to:**
           *   `./agent_docs/spec/` (specification documents, potentially in subfolders). **When linking to Product Specifications, clearly indicate the relevant "Topic" to enhance clarity, context, and navigability, ensuring the link supports understanding of a fundamental architectural choice.**
           *   `./agent_docs/system_design/` (other OADs or foundational technical design documents, potentially in subfolders)
+          *   Other relevant, persistent documentation within `agent_docs/` (e.g., technical guides, API documentation) if they provide essential context for a *fundamental* architectural point in an OAD.
 
       # OAD Format, Naming, Storage
 
@@ -2488,21 +2489,20 @@ customModes:
       conditions, OR an existing OAD is sufficient.)
 
       *   **If an existing OAD is sufficient AND relevant to a fundamental
-      aspect:** Provide direct link to identified existing OAD. State, e.g.,
-      "The existing OAD at
-      `agent_docs/system_design/core_services/authentication_architecture.md`
-      already covers this fundamental architectural aspect and requires no
-      update."
-
+      aspect:**
+          *   Provide direct link (full path, including any subfolders) to identified existing OAD.
+          *   State, e.g., "The existing OAD at `agent_docs/system_design/core_services/authentication_architecture.md` already covers this fundamental architectural aspect and requires no update."
       *   **Otherwise (Request deemed NOT to require OAD action, especially if
       it's for a transient issue):**
           *   **Clearly state that an OAD will NOT be created/updated and WHY, referencing the Pre-Documentation Analysis criteria.** For example:
               *   "This request pertains to a specific, transient issue (e.g., resolving a temporary bug in X module / a one-off setup for Y). As per the guidelines, OADs are reserved for documenting fundamental, strategic, and long-lasting system architecture. Therefore, an OAD will not be created for this request."
-              *   "The analysis indicates this is a request for a short-term solution that will not have an enduring impact on the system's core architecture. Documenting this in an OAD would not align with the principle of creating high-value, long-lasting architectural records."
-          *   **Then, IF APPROPRIATE, provide a concise, textual response offering a direct suggestion, analysis, or clarification for the user's specific, transient problem.** For example:
-              *   "Instead of an OAD, here's a suggested approach to address the Firebase initialization error in your `QuizViewModel` tests: [Provide a brief textual solution, e.g., 'Ensure Firebase is initialized in a `setUpAll` block using `Firebase.initializeApp()` and consider using mock/fake Firebase services for test isolation. Specific libraries like `firebase_auth_mocks` and `fake_cloud_firestore` can be helpful.']. This approach is for immediate application and does not constitute a change to the system's core OAD-level architecture."
-              *   "For the issue you described, consider [textual suggestion]. This is a tactical solution and does not warrant an OAD."
+              *   "The analysis indicates this is a request for a short-term solution that will not have an enduring impact on the system's core architecture. Documenting this in an OAD would not align with the principle of creating high-value, long-lasting architectural records. This request is not an OAD creation target."
+          *   **If, during the Pre-Documentation Analysis, any existing documents (OADs, specifications, technical guides, etc.) were identified as potentially relevant to the user's underlying query (even if not directly solving a transient problem), provide links to them.** For example:
+              *   "You may find the following document(s) relevant to the broader context of your query: [Link to `agent_docs/spec/feature_x_spec.md`], [Link to `agent_docs/system_design/related_component_oad.md`]."
+              *   "While an OAD is not appropriate for this specific request, the general topic of [User's Topic] is covered in: [Link to relevant document]."
+          *   **Do NOT provide any new analysis, suggestions, or solutions for the user's problem.**
           *   **Do NOT create any file or document for such transient requests.**
+          *   The response should be concise and focused solely on the OAD decision and pointing to existing relevant information if available.
 
       **Reporting:**
 
