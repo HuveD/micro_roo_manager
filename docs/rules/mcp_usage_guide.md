@@ -82,6 +82,24 @@ You **SHOULD** consider using `firecrawl` when:
 *   A webpage needs to be converted into a clean, LLM-friendly Markdown format.
 *   The latest information must be fetched from external documentation sites not managed internally (e.g., partner API documentation), especially when `context7` is not applicable (e.g., for non-code, general documentation).
 
+### 5.3. Usage Example
+```json
+{
+  "name": "firecrawl_scrape",
+  "arguments": {
+    "url": "https://example.com",
+    "formats": ["markdown"],
+    "onlyMainContent": true,
+    "waitFor": 1000,
+    "timeout": 30000,
+    "mobile": false,
+    "includeTags": ["article", "main"],
+    "excludeTags": ["nav", "footer"],
+    "skipTlsVerification": false
+  }
+}
+```
+
 ---
 
 ## 6. `mem0` MCP: Contextual Memory & Personalization
