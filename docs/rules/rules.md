@@ -13,11 +13,11 @@
 2.  **Secondary Attempts - Alternative Granular Tools (If `apply_diff` Fails):**
     *   If `apply_diff` is unsuccessful (e.g., due to complex changes not suitable for diffs, or if it errors), you may then attempt the modification using `insert_content` or `search_and_replace`. Choose the tool most appropriate for the specific modification task.
 
-3.  **Ultimate Fallback - Mandatory `write_file` Usage (If ANY Modification Tool Fails):**
-    *   If **ANY** file modification attempt with `apply_diff`, `insert_content`, or `search_and_replace` fails, you **MUST IMMEDIATELY AND EXCLUSIVELY** use `write_file` to update the entire file with the intended content.
+3.  **Ultimate Fallback - Mandatory `write_to_file` Usage (If ANY Modification Tool Fails):**
+    *   If **ANY** file modification attempt with `apply_diff`, `insert_content`, or `search_and_replace` fails, you **MUST IMMEDIATELY AND EXCLUSIVELY** use `write_to_file` to update the entire file with the intended content.
     *   **CRITICAL:** This is the **FINAL** and **GUARANTEED** step to ensure the file modification is completed.
     *   **DO NOT** re-attempt a previously failed tool (e.g., `apply_diff` again after it failed).
-    *   **DO NOT** try another granular tool (e.g., `insert_content` after `apply_diff` failed) if the initial attempt with that category of tool has already failed. Proceed directly to `write_file`. This is crucial to prevent operational loops.
+    *   **DO NOT** try another granular tool (e.g., `insert_content` after `apply_diff` failed) if the initial attempt with that category of tool has already failed. Proceed directly to `write_to_file`. This is crucial to prevent operational loops.
 
 ---
 
@@ -65,20 +65,20 @@ For precise code modifications with strict formatting requirements.
   ```
 
 **Failure Handling for `apply_diff`:**
-*   If `apply_diff` fails to modify the file correctly, **DO NOT** attempt `apply_diff` again. Proceed according to the "File Modification Strategy": first try `insert_content` or `search_and_replace` if appropriate for the task and if they haven't failed already for this modification. If those also fail or are not appropriate, **IMMEDIATELY** resort to `write_file`.
+*   If `apply_diff` fails to modify the file correctly, **DO NOT** attempt `apply_diff` again. Proceed according to the "File Modification Strategy": first try `insert_content` or `search_and_replace` if appropriate for the task and if they haven't failed already for this modification. If those also fail or are not appropriate, **IMMEDIATELY** resort to `write_to_file`.
 
 ---
 
-### Tool: `write_file`
+### Tool: `write_to_file`
 Overwrites the entire file with new content.
 
 *   **Primary Use Case (Fallback):** This tool is the **MANDATORY** fallback when `apply_diff`, `insert_content`, or `search_and_replace` fail to modify a file. Its use in such scenarios is critical to prevent loops and ensure task completion.
 *   **Usage:**
     ```xml
-    <write_file>
+    <write_to_file>
       <path>file.js</path>
       <content>entire new file content here</content>
-    </write_file>
+    </write_to_file>
     ```
 
 ---
@@ -104,7 +104,7 @@ Adds new content at a specified line number in a file.
       <content>new code to insert</content>
     </insert_content>
     ```
-*   **Failure Handling:** If `insert_content` fails, **IMMEDIATELY AND ALWAYS** use `write_file` as the fallback, as per the "File Modification Strategy". Do not re-attempt `insert_content`.
+*   **Failure Handling:** If `insert_content` fails, **IMMEDIATELY AND ALWAYS** use `write_to_file` as the fallback, as per the "File Modification Strategy". Do not re-attempt `insert_content`.
 
 ---
 
@@ -120,7 +120,7 @@ Performs a simple text search and replaces all occurrences with new text.
       <replace>text to replace with</replace>
     </search_and_replace>
     ```
-*   **Failure Handling:** If `search_and_replace` fails, **IMMEDIATELY AND ALWAYS** use `write_file` as the fallback, as per the "File Modification Strategy". Do not re-attempt `search_and_replace`.
+*   **Failure Handling:** If `search_and_replace` fails, **IMMEDIATELY AND ALWAYS** use `write_to_file` as the fallback, as per the "File Modification Strategy". Do not re-attempt `search_and_replace`.
 
 ---
 
