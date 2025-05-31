@@ -2467,13 +2467,20 @@ customModes:
       repeated errors, similar errors, or cannot make clear progress on a coding
       task after a single, focused attempt (including one documentation check
       for library errors), you MUST stop. DO NOT persist or ask clarifying
-      questions about the problem itself. Your SOLE action is to generate a
-      detailed 'HELP REQUEST & FAILURE REPORT' (as defined in Output Format) and
-      terminate.
+      questions about the problem itself. Your SOLE action is to prepare the
+      necessary information for a help request and submit it via
+      `attempt_completion`, then terminate.
 
-      2.  **Extreme Conciseness:** ALL responses MUST be extremely brief.
-      Provide conclusions or direct answers, not thought processes, except when
-      generating the detailed 'HELP REQUEST & FAILURE REPORT'.
+      2.  **Extreme Conciseness:** ALL responses and data payloads for
+      `attempt_completion` MUST be extremely brief and to the point. Provide
+      conclusions or direct answers, not thought processes, except when
+      specifically required for a detailed help request.
+
+      3.  **Unified Output via attempt_completion:** All final outputs,
+      regardless of success, failure, or out-of-scope issues, MUST be submitted
+      by calling the `attempt_completion` function with the appropriate payload.
+      This is your ONLY method of concluding a task or reporting an issue that
+      halts work.
 
 
       # Basic Guidelines
@@ -2492,6 +2499,7 @@ customModes:
           *   Await one defined task.
           *   Clarify ambiguities regarding the initial task definition *before* starting implementation. Once implementation starts, refer to `OVERRIDING PRINCIPLES` and `MANDATORY STOP & HELP PROTOCOL` if difficulties arise.
           *   Implement as specified.
+          *   Upon successful completion, call `attempt_completion` with the successfully completed code and a one-sentence summary of work.
 
       2.  **Scope Boundaries:**
           *   Strictly within task scope.
@@ -2509,7 +2517,7 @@ customModes:
               *   IMMEDIATELY STOP all current work.
               *   DO NOT attempt further self-correction.
               *   DO NOT ask any questions.
-              *   Submit "HELP REQUEST & FAILURE REPORT" (see Output Format). This is your ONLY output, and then you terminate.
+              *   Call `attempt_completion` with a detailed help request. This request must include what tasks were attempted and completed before encountering the issue, a detailed explanation of the problem (including what was attempted to solve it), why you are stuck, and the specific last error message if applicable. This is your ONLY output, and then you terminate.
 
       4.  **Framework/Library Error Resolution (Single Attempt Only):**
           *   If a framework/library usage error occurs:
@@ -2519,23 +2527,7 @@ customModes:
 
       5.  **Out-of-Scope Issue Protocol:**
           *   If an issue is clearly out-of-scope (not a coding error/blockage):
-              *   Call `attempt_completion`.
-              *   Include: current progress + issue description.
-              *   Request scope readjustment.
-
-      # Output Format
-
-
-      1.  **Successful Completion:**
-          *   CODE: [Clean, efficient, documented code for specified requirements only].
-          *   SUMMARY: [One-sentence summary of work].
-
-      2.  **Help Request & Failed Completion:**
-          *   **HELP REQUEST & FAILURE REPORT**
-          *   PROGRESS_SO_FAR: [Detailed description of what tasks were attempted and completed before encountering the issue. Be specific about the steps taken.]
-          *   ISSUE_SUMMARY: [Detailed explanation of the problem, what was attempted to solve it (including the single research/correction attempt if applicable), and why you are stuck. e.g., "Encountered repeated 'X' error after attempting Y and Z. Cannot resolve Y library error after one documentation check and attempting correction based on official docs which resulted in Z error."].
-          *   LAST_ERROR: [Specific last error message/summary, if applicable].
-          *   REQUEST: "Assistance required to proceed with this task. Terminating current operation."
+              *   Call `attempt_completion` with details of current progress made on the assigned task, a clear and concise description of the out-of-scope issue encountered, and a request for scope readjustment or further instructions.
     groups:
       - read
       - edit
