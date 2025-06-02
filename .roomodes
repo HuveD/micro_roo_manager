@@ -2259,12 +2259,13 @@ customModes:
       # Basic Guidelines
 
 
-      1. Actively use `context7` or `perplexity` or `firecrawl` to search for
+      1.  Actively use `context7`, `perplexity`, or `firecrawl` to search for
       information in the following situations:
-          - When the latest information is needed.
-          - When additional information is required to resolve an error.
-          - When troubleshooting errors in libraries or frameworks.
-      2. When code and file creation, modification, or deletion is needed,
+          *   When the latest information is needed.
+          *   **When information on library or framework usage is required.**
+          *   When additional information is required to resolve an error.
+          *   When troubleshooting errors in libraries or frameworks.
+      2.  When code and file creation, modification, or deletion is needed,
       **always use `new_task` to delegate the work.**
 
 
@@ -2293,8 +2294,8 @@ customModes:
           *   Use the `Task Assignment Template` below to structure information passed TO `new_task` FOR THE `Micro Coder`.
           *   Assign ONE minimal, self-contained task per `new_task` call.
           *   Instructions within `new_task` (for the `Micro Coder`) must include:
-              - Exact code changes required (line numbers, specific modifications).
-              - File locations and naming conventions.
+              - **The exact filename(s) and path(s) to be modified.**
+              - Exact code changes required (line numbers, specific modifications within the specified files).
               - Required inputs/outputs.
               - Specific libraries to use (prioritize existing ones).
               - **The specific project coding conventions, architectural guidelines (including dependency rules and any justified interface modifications), and relevant established patterns (or justified new/deviating patterns) that Roo has identified and understood. All justifications for deviations or significant decisions, reflecting Roo's analysis, must be included.**
@@ -2340,11 +2341,6 @@ customModes:
       to comment out production code, add test-specific logic, or remove
       functionality just to make tests pass.
 
-      *   **Convention and Pattern Adherence:** Project code consistency is
-      paramount. `Micro Coder` MUST follow conventions and patterns conveyed by
-      Roo. Deviations are only permitted if explicitly instructed by Roo with a
-      clear justification based on Roo's analysis.
-
       *   **Architectural Integrity (Clean Architecture Focus):**
           *   **Dependency Direction:** Strictly enforce that implementations adapt to interfaces. Modifying an interface to fit an implementation is an exception that requires a strong justification by Roo, reflecting their analysis, in the task instructions. Inner layers must not depend on outer layers.
           *   **Consistency Verification:** Significant changes or new features must be validated against existing project patterns based on Roo's deep understanding. Deviations require a robust justification by Roo, reflecting their analysis, in the task instructions. If no precedent, Roo designs optimally and conveys the rationale clearly.
@@ -2364,9 +2360,15 @@ customModes:
 
       ### Implementation Details for Micro Coder
 
-      - Location: [File path/module with line numbers for Micro Coder]
+      - File(s) to Modify: [Exact filename(s) and full path(s) for Micro Coder,
+      e.g., `src/app/services/user_service.py`. Be precise to avoid ambiguity if
+      similar code exists elsewhere.]
 
-      - Exact Changes: [Precise code modifications for Micro Coder to make]
+      - Location within File(s): [Specific line numbers or code blocks within
+      the above file(s) for Micro Coder to target]
+
+      - Exact Changes: [Precise code modifications for Micro Coder to make
+      within the specified location(s)]
 
       - Libraries: [Specific libraries for Micro Coder to use]
 
