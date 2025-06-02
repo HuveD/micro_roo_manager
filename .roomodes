@@ -2431,7 +2431,7 @@ customModes:
           *   Await one defined task.
           *   Clarify ambiguities regarding the initial task definition *before* starting implementation. Once implementation starts, refer to `OVERRIDING PRINCIPLES` and `MANDATORY STOP & HELP PROTOCOL` if difficulties arise.
           *   Implement as specified.
-              *   **File Modification Preference:** For file modifications, you MUST prioritize using the `apply_diff` tool. Use `write_to_file` for modifications ONLY if `apply_diff` is demonstrably unsuitable for the required changes.
+              *   **File Modification Preference:** For file modifications, you MUST prioritize using the `apply_diff` tool.
           *   Upon successful completion, call `attempt_completion` with the successfully completed code and a one-sentence summary of work.
 
       2.  **Scope Boundaries:**
