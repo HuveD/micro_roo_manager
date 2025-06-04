@@ -27,7 +27,21 @@
     *   A method should consistently either orchestrate calls to other services/methods (high-level) or implement detailed logic (low-level).
     *   Prohibition: Do not mix high-level operational logic (e.g., coordinating multiple complex steps) with low-level implementation details (e.g., data manipulation, direct hardware interaction) within the same method.
 
-## 4. Conditional Logic
+## 4. Type Safety
+*   **Strong Typing:** Prefer strongly typed code over dynamic types to ensure compile-time safety and better IDE support.
+*   **Prohibition: Dynamic Types:** Avoid using dynamic types such as `dynamic`, `Object`, `unknown`, `any`, or similar constructs except when absolutely necessary.
+    *   **Exception: External Interfaces:** Dynamic types MAY be used when interfacing with external systems, APIs, or third-party libraries where type information is unavailable or unreliable.
+    *   **Exception: Migration Scenarios:** Temporary use of dynamic types is acceptable during legacy code migration, but MUST be replaced with proper types as soon as feasible.
+*   **Internal Code Requirements:** For all internal application code:
+    *   MUST use explicit, well-defined types for all variables, parameters, and return values.
+    *   Prefer generics over dynamic types when dealing with type parameters or collections.
+    *   Utilize union types, intersection types, or discriminated unions when multiple specific types are valid.
+*   **Type Definition Priority:** When encountering scenarios that might tempt the use of dynamic types:
+    1. First, attempt to define specific types or interfaces.
+    2. Second, consider using generics with appropriate constraints.
+    3. Last resort: Use dynamic types only if external factors make proper typing impossible.
+
+## 5. Conditional Logic
 *   **Guard Clauses:** Use guard clauses (early `if` exits) for preconditions and input validation, primarily at the beginning of methods.
 *   **Prohibition: `if/else` Constructs:** Avoid `if/else` statements.
     *   Alternatives: Prefer multiple guard clauses for simple conditions, or polymorphism/Strategy pattern for complex logic.
@@ -35,7 +49,7 @@
     *   Alternatives: Utilize polymorphism, Strategy pattern, or other object-oriented design patterns.
 *   **Pure Conditions:** All conditional expressions (e.g., in `if` statements, loops) MUST be pure, meaning they do not cause side effects.
 
-## 5. Object-Oriented Programming (OOP) Principles
+## 6. Object-Oriented Programming (OOP) Principles
 *   **Interface-Based Inheritance:** Inherit exclusively from interfaces.
     *   Prohibition: Do not inherit from concrete or abstract classes.
 *   **Tell, Don't Ask Principle:**
@@ -43,7 +57,7 @@
     *   Minimize or avoid public getters that merely expose internal state for external code to make decisions upon.
 *   **Type Code Elimination:** Replace primitive type codes (e.g., integers or strings used to represent types or states) with dedicated classes, subclasses, or object-oriented patterns (e.g., State pattern, Strategy pattern).
 
-## 6. Code Clarity and Maintainability
+## 7. Code Clarity and Maintainability
 *   **Self-Documenting Code:** Strive for code where its intent and functionality are clear from reading the code itself, making most comments redundant.
 *   **Purposeful Comments:** If comments are absolutely necessary:
     *   They MUST explain *why* a particular design choice was made or *why* a piece of code exists (e.g., rationale, trade-offs, workarounds for external system quirks).
@@ -59,26 +73,30 @@ When assisting developers, the AI should prioritize guidance and refactoring sug
 1.  **Method Length & SRP Violations:**
     *   Identify methods exceeding the 10-line limit.
     *   Suggest extraction of logic to ensure each method adheres to SRP and meets length requirements.
-2.  **Complex Conditional Logic:**
+2.  **Type Safety Violations:**
+    *   Identify inappropriate use of dynamic types (`dynamic`, `Object`, `unknown`, `any`) in internal code.
+    *   Suggest specific type definitions, generics, or union types as alternatives.
+    *   Verify that dynamic type usage is justified by external interface requirements.
+3.  **Complex Conditional Logic:**
     *   Identify uses of `if/else` constructs and `switch` statements.
     *   Recommend replacements such as guard clauses, polymorphism, or strategy patterns.
-3.  **"Tell, Don't Ask" Principle Adherence:**
+4.  **"Tell, Don't Ask" Principle Adherence:**
     *   Identify excessive use of getters that lead to external code querying object state for decision-making.
     *   Suggest refactoring to empower objects with behavior, internalizing decision logic.
-4.  **Inheritance Practices:**
+5.  **Inheritance Practices:**
     *   Detect inheritance from concrete or abstract classes.
     *   Advise migration to interface-based inheritance.
-5.  **File Organization & Modularity Issues:**
+6.  **File Organization & Modularity Issues:**
     *   Detect monolithic files or poor logical grouping of code.
     *   Advise on restructuring to improve cohesion and reduce coupling.
-6.  **Abstraction Level Consistency:**
+7.  **Abstraction Level Consistency:**
     *   Identify methods mixing different levels of abstraction.
     *   Suggest refactoring to maintain a single level of abstraction per method.
-7.  **Use of Type Codes:**
+8.  **Use of Type Codes:**
     *   Find instances where primitive type codes are used.
     *   Recommend replacing them with dedicated classes or appropriate OO patterns.
-8.  **Code Clarity & Waste Reduction:**
+9.  **Code Clarity & Waste Reduction:**
     *   Highlight opportunities to improve code clarity (e.g., removing comments that explain the 'what').
     *   Suggest removal of dead, unnecessary, or overly complex code.
-9.  **Tooling Encouragement:**
+10. **Tooling Encouragement:**
     *   Encourage developers to leverage compiler feedback and static analysis tools as part of their development and refactoring workflow.
