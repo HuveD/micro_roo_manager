@@ -28,7 +28,7 @@ echo "💫 동기화: 공통 문서를 각 모드 폴더로 복사하는 중..."
 
 # code_quality_rules.md 복사
 if [ -f "${SPECIFIC_DIR}/code_quality_rules.md" ]; then
-  for dest_dir in "rules-optimizer" "rules-code" "rules-micro-coder" "rules-designer" "rules-tdd-cycle"; do
+  for dest_dir in "rules-optimizer" "rules-code" "rules-expert-developer-lead" "rules-designer" "rules-tdd-cycle"; do
     target_dir="${DOCS_DIR}/${dest_dir}"
     mkdir -p "${target_dir}"
     echo "  ✓ code_quality_rules.md → ${dest_dir}"
@@ -61,5 +61,18 @@ if [ -f "${SPECIFIC_DIR}/mermaid_quick_usage_guide.md" ]; then
 else
   echo "⚠️ 경고: specific 디렉토리에서 mermaid_quick_usage_guide.md 파일을 찾을 수 없습니다."
 fi
+
+# tdd_test_selection_guidelines.md 복사
+if [ -f "${SPECIFIC_DIR}/tdd_test_selection_guidelines.md" ]; then
+  for dest_dir in "rules-tdd-cycle" "rules-expert-developer-lead" "rules-code"; do
+    target_dir="${DOCS_DIR}/${dest_dir}"
+    mkdir -p "${target_dir}"
+    echo "  ✓ tdd_test_selection_guidelines.md → ${dest_dir}"
+    cp "${SPECIFIC_DIR}/tdd_test_selection_guidelines.md" "${target_dir}/tdd_test_selection_guidelines.md"
+  done
+else
+  echo "⚠️ 경고: specific 디렉토리에서 tdd_test_selection_guidelines.md 파일을 찾을 수 없습니다."
+fi
+
 
 echo "✅ 공통 문서 동기화 완료!"
