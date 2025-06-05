@@ -68,21 +68,41 @@ Actively avoid creating these tests. For removal during test suite hygiene:
 
 Beyond individual test selection, effective management of the entire test suite is crucial for resource optimization and maintaining TDD benefits.
 
-### 1. Test Data Management Strategy
+### 1. Test File Structure & Location Convention
+This is a foundational rule for maintaining a clean and predictable codebase.
+
+*   **Primary Rule: Consistency**
+    *   **IF** an existing test file structure convention is present in the project:
+    *   **THEN** all new test files **MUST** strictly adhere to that established convention.
+    *   **Example:** If all existing tests are located in a root `/tests` directory, all new tests must also be created there.
+
+*   **Fallback Rule: Best Practices**
+    *   **IF** no established test convention exists (e.g., a new project):
+    *   **THEN** implement the standard, idiomatic convention for the project's primary language and testing framework.
+    *   **Examples:**
+        *   **Java (Maven/Gradle):** `src/test/java/...`
+        *   **Python (pytest):** A parallel `/tests` directory (`/src`, `/tests`).
+        *   **JavaScript (Jest):** A `/__tests__/` subdirectory or `.test.js`/`.spec.js` files adjacent to source files.
+        *   **Go:** `_test.go` files in the same package/directory as the source code.
+
+*   **Prohibition**
+    *   **DO NOT** introduce a new or conflicting test file structure if one already exists. The goal is absolute consistency. Avoid creating tests in multiple locations (e.g., some in `/src` and some in `/tests`).
+
+### 2. Test Data Management Strategy
 Develop a clear strategy for managing test data to ensure consistency, isolation, and efficiency:
 *   **Reusability & Isolation:** Design test data to be reusable where appropriate, but ensure tests are isolated to prevent interdependencies and flaky results.
 *   **Realistic Data:** Use data that reflects production scenarios (anonymized and desensitized if originating from production) without using actual sensitive production data in test environments.
 *   **Efficient Setup & Teardown:** Implement efficient data setup and teardown mechanisms (e.g., transactional fixtures, in-memory databases reset per test/suite, data factories).
 *   **Minimize Test Data Footprint:** Keep test data concise and focused on the specific scenario being tested.
 
-### 2. Test Execution Speed Optimization
+### 3. Test Execution Speed Optimization
 Continuously monitor and optimize test execution speed to maintain developer productivity and enable rapid feedback loops:
 *   **Minimize I/O:** Avoid unnecessary disk or network I/O in unit and integration tests. Favor in-memory fakes or stubs.
 *   **In-Memory Alternatives:** Utilize in-memory databases or lightweight service fakes for faster execution where appropriate, especially for unit and component integration tests.
 *   **Parallelization:** Explore and leverage parallel test execution capabilities of your test runner and CI/CD pipeline.
 *   **Identify Bottlenecks:** Regularly profile test runs to identify and address slow-running tests. These might be candidates for refactoring or re-evaluation of their value versus cost.
 
-### 3. Periodic Test Suite Hygiene
+### 4. Periodic Test Suite Hygiene
 Establish a regular, proactive process for test suite hygiene to maintain its value, relevance, and efficiency:
 *   **Scheduled Reviews:** Periodically review the entire test suite (e.g., quarterly, bi-annually, or triggered by significant refactoring efforts) with the team.
 *   **Refactor & Remove:** Actively refactor brittle, unclear, or overly complex tests. Remove tests that no longer provide value based on the criteria in Section II.
