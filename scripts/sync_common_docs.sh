@@ -28,7 +28,7 @@ echo "💫 동기화: 공통 문서를 각 모드 폴더로 복사하는 중..."
 
 # code_quality_rules.md 복사
 if [ -f "${SPECIFIC_DIR}/code_quality_rules.md" ]; then
-  for dest_dir in "rules-optimizer" "rules-code" "rules-expert-developer-lead" "rules-designer" "rules-tdd-cycle"; do
+  for dest_dir in "rules-optimizer" "rules-code" "rules-expert-developer-lead" "rules-designer" "rules-tdd-cycle" "rules-senior-coder"; do
     target_dir="${DOCS_DIR}/${dest_dir}"
     mkdir -p "${target_dir}"
     echo "  ✓ code_quality_rules.md → ${dest_dir}"
@@ -64,7 +64,7 @@ fi
 
 # tdd_test_selection_guidelines.md 복사
 if [ -f "${SPECIFIC_DIR}/tdd_test_selection_guidelines.md" ]; then
-  for dest_dir in "rules-tdd-cycle" "rules-expert-developer-lead" "rules-code"; do
+  for dest_dir in "rules-tdd-cycle" "rules-expert-developer-lead" "rules-code" "rules-senior-coder"; do
     target_dir="${DOCS_DIR}/${dest_dir}"
     mkdir -p "${target_dir}"
     echo "  ✓ tdd_test_selection_guidelines.md → ${dest_dir}"
