@@ -74,5 +74,4 @@ else
   echo "⚠️ 경고: specific 디렉토리에서 tdd_test_selection_guidelines.md 파일을 찾을 수 없습니다."
 fi
 
-
 echo "✅ 공통 문서 동기화 완료!"
