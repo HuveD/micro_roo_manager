@@ -121,8 +121,8 @@ else
   echo "  ✓ .claude directory exists, preserving existing files..."
 fi
 
-# .claude 폴더 복사 (기존 파일이 있는 경우에만 덮어쓰기)
-echo "  ✓ .claude 폴더 파일 업데이트 중 (기존 파일만 덮어쓰기)..."
+# .claude 폴더 복사 (기존 파일 덮어쓰기, 새 파일 추가)
+echo "  ✓ .claude 폴더 파일 복사 중 (기존 파일 보존)..."
 if [ -d "$EXTRACTED_DIR/.claude" ]; then
   # Find and copy all files in the .claude directory with their subdirectory structure
   for file_path in $(find "$EXTRACTED_DIR/.claude" -type f -print); do
@@ -134,13 +134,14 @@ if [ -d "$EXTRACTED_DIR/.claude" ]; then
     # Create subdirectory if needed
     mkdir -p "$dest_dir_path"
     
-    # Check if file exists and copy with certain overwrite (only update existing files)
+    # Check if file exists and copy with certain overwrite
     if [ -f "$dest_file" ]; then
       rm -f "$dest_file"
       cp "$file_path" "$dest_file"
       echo "    ⟳ Updated: .claude/$rel_path"
     else
-      echo "    ⊘ Skipped (new file): .claude/$rel_path"
+      cp "$file_path" "$dest_file"
+      echo "    ✓ Added: .claude/$rel_path"
     fi
   done
 fi
@@ -154,5 +155,5 @@ rm -f micro_roo_manager.zip
 
 echo "✅ Installation completed!"
 echo "🔧 .roomodes file and .roo directory have been successfully updated."
-echo "🔧 .claude directory has been updated (existing files only)."
+echo "🔧 .claude directory has been successfully updated."
 echo "📁 기존 개별 rules 파일들은 보존되었고, 중복 파일들은 최신 버전으로 업데이트되었습니다."
