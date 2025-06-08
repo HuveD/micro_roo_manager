@@ -123,7 +123,13 @@ fi
 
 # .claude 폴더 복사 (기존 파일 덮어쓰기, 새 파일 추가)
 echo "  ✓ .claude 폴더 파일 복사 중 (기존 파일 보존)..."
+
+# Debug: Check if .claude directory exists in extracted files
 if [ -d "$EXTRACTED_DIR/.claude" ]; then
+  echo "  🔍 Found .claude directory in extracted files"
+  echo "  📋 .claude 폴더 내용 확인:"
+  find "$EXTRACTED_DIR/.claude" -type f | sort
+  
   # Find and copy all files in the .claude directory with their subdirectory structure
   for file_path in $(find "$EXTRACTED_DIR/.claude" -type f -print); do
     rel_path="${file_path#$EXTRACTED_DIR/.claude/}"
@@ -131,8 +137,13 @@ if [ -d "$EXTRACTED_DIR/.claude" ]; then
     dest_file=".claude/$rel_path"
     dest_dir_path=$(dirname "$dest_file")
     
+    echo "  🔍 Processing: $rel_path"
+    echo "    Source: $file_path"
+    echo "    Destination: $dest_file"
+    
     # Create subdirectory if needed
     mkdir -p "$dest_dir_path"
+    echo "    Directory created: $dest_dir_path"
     
     # Check if file exists and copy with certain overwrite
     if [ -f "$dest_file" ]; then
@@ -143,7 +154,17 @@ if [ -d "$EXTRACTED_DIR/.claude" ]; then
       cp "$file_path" "$dest_file"
       echo "    ✓ Added: .claude/$rel_path"
     fi
+    
+    # Verify the file was actually copied
+    if [ -f "$dest_file" ]; then
+      echo "    ✅ Verification passed: File exists at destination"
+    else
+      echo "    ❌ Verification failed: File not found at destination"
+    fi
+    echo ""
   done
+else
+  echo "  ⚠️ No .claude directory found in extracted files ($EXTRACTED_DIR/.claude)"
 fi
 
 # 6. Remove the tmp_micro_manager directory
