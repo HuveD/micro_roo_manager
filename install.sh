@@ -110,13 +110,49 @@ for src_dir in "$EXTRACTED_DIR/docs/rules-"*; do
   fi
 done
 
-# 5. Remove the tmp_micro_manager directory
+# 5. .claude 디렉토리 설정
+echo "🔄 Setting up .claude directory..."
+
+# Create .claude directory if it doesn't exist (preserve existing content)
+if [ ! -d ".claude" ]; then
+  echo "  ✓ Creating new .claude directory..."
+  mkdir -p .claude
+else
+  echo "  ✓ .claude directory exists, preserving existing files..."
+fi
+
+# .claude 폴더 복사 (기존 파일이 있는 경우에만 덮어쓰기)
+echo "  ✓ .claude 폴더 파일 업데이트 중 (기존 파일만 덮어쓰기)..."
+if [ -d "$EXTRACTED_DIR/.claude" ]; then
+  # Find and copy all files in the .claude directory with their subdirectory structure
+  for file_path in $(find "$EXTRACTED_DIR/.claude" -type f -print); do
+    rel_path="${file_path#$EXTRACTED_DIR/.claude/}"
+    
+    dest_file=".claude/$rel_path"
+    dest_dir_path=$(dirname "$dest_file")
+    
+    # Create subdirectory if needed
+    mkdir -p "$dest_dir_path"
+    
+    # Check if file exists and copy with certain overwrite (only update existing files)
+    if [ -f "$dest_file" ]; then
+      rm -f "$dest_file"
+      cp "$file_path" "$dest_file"
+      echo "    ⟳ Updated: .claude/$rel_path"
+    else
+      echo "    ⊘ Skipped (new file): .claude/$rel_path"
+    fi
+  done
+fi
+
+# 6. Remove the tmp_micro_manager directory
 echo "🧹 Cleaning up temporary files..."
 rm -rf tmp_micro_manager
 
-# 6. Remove the zip file
+# 7. Remove the zip file
 rm -f micro_roo_manager.zip
 
 echo "✅ Installation completed!"
 echo "🔧 .roomodes file and .roo directory have been successfully updated."
+echo "🔧 .claude directory has been updated (existing files only)."
 echo "📁 기존 개별 rules 파일들은 보존되었고, 중복 파일들은 최신 버전으로 업데이트되었습니다."
