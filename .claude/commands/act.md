@@ -1,6 +1,6 @@
 # 작업 실행 규칙 (Document-Driven TDD)
 
-ultrathink: plan-output.md를 기반으로 문서 주도 TDD 방식으로 작업을 실행하세요.
+ultrathink. plan-output.md를 기반으로 문서 주도 TDD 방식으로 작업을 실행하세요.
 
 ## 🚨 필수 실행 순서
 

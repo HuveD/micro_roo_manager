@@ -4,7 +4,7 @@
 $ARGUMENTS
 ```
 
-ultrathink: 위 요구사항에 대해 문서 주도 개발(Document-Driven) + 도메인 주도 개발(Domain-Driven) 원칙으로 계획을 수립하세요.
+ultrathink. 위 요구사항에 대해 문서 주도 개발(Document-Driven) + 도메인 주도 개발(Domain-Driven) 원칙으로 계획을 수립하세요.
 
 ## 🚨 필수 실행 순서
 
