@@ -1,5 +1,5 @@
-$ARGUMENTS
-ultrathink: 위 요구사항을 분석하여 Document-Driven + Domain-Driven Development 원칙으로 작업 계획을 수립하세요.
+ultrathink: $ARGUMENTS
+위 요구사항을 분석하여 Document-Driven + Domain-Driven Development 원칙으로 작업 계획을 수립하세요.
 
 먼저 plan-output.md가 존재하는지 확인하세요:
 
