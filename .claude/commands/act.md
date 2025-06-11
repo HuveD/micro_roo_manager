@@ -1,6 +1,30 @@
-plan-output.md를 기반으로 Universal Document-Driven TDD 방식으로 작업을 실행하세요. ultrathink.
+plan-output.md를 기반으로 스마트 작업 타입에 최적화된 방식으로 작업을 실행하세요. ultrathink.
 
-**핵심 원칙**: 이것은 완전 자동화된 작업 실행 명령입니다. 한 번 시작하면 모든 TODO가 완료될 때까지 절대 멈추지 마세요. 
+**핵심 원칙**: 이것은 완전 자동화된 작업 실행 명령입니다. 한 번 시작하면 모든 TODO가 완료될 때까지 절대 멈추지 마세요.
+
+## 작업 타입 자동 감지
+
+plan-output.md의 "작업 타입" 필드를 확인하여 최적화된 실행 전략을 선택하세요:
+
+### 핫픽스/버그 수정
+워크플로우: impl-fix → test-verify  
+우선순위: 빠른 수정과 검증
+
+### 단순 기능 추가  
+워크플로우: plan-feature → impl-core → test-integration
+우선순위: 설계 후 구현
+
+### 아키텍처/복잡한 변경
+워크플로우: plan-architecture → doc-design → test-strategy → impl-phases
+우선순위: 문서화 우선
+
+### 표준/가이드라인 구축
+워크플로우: plan-standards → doc-standards → impl-apply → test-compliance
+우선순위: 표준 문서화 후 적용
+
+### 리팩토링
+워크플로우: test-existing → impl-refactor → test-regression  
+우선순위: 기존 테스트 확보 후 개선 
 
 **절대 규칙**:
 1. 미완료 TODO가 하나라도 있으면 계속 진행
@@ -10,46 +34,60 @@ plan-output.md를 기반으로 Universal Document-Driven TDD 방식으로 작업
 5. "다음 단계", "계속하시겠습니까?", "남은 작업은..." 등의 표현 금지
 
 먼저 plan-output.md를 읽어서 다음을 확인하세요:
-- 요구사항 명세 (필수 Context)
-- 설계 문서 (구조 Context)
-- 인터페이스 명세 (통신 Context)
-- 비즈니스 로직 (도메인 Context)
-- 테스트 전략 (품질 Context)
-- 구현 가이드 (기술 Context)
+- 작업 타입 (실행 전략 결정)
+- 핵심 목표 (작업 범위)
+- 장기적 가치 문서 (필요한 경우만)
 - TODO 목록 및 진행 상태 (작업 Context)
 
-docs/ 폴더 구조의 링크들이 유효한지 확인하세요: requirements, design, interfaces, logic, testing, implementation.
+작업 타입에 따라 필요한 docs/ 폴더만 확인하세요:
+- **모든 타입**: interfaces/ (외부 연동시), design/ (복잡한 시스템), logic/ (복잡한 로직), standards/ (표준 작업시)
+- **불필요한 일회성 문서는 건너뜀**
 
-plan-output.md가 없거나 TODO 목록이 비어있다면 "plan 명령을 먼저 실행하여 Context를 설정하세요"라고 응답하고 중단하세요.
+plan-output.md가 없거나 TODO 목록이 비어있다면 "plan 명령을 먼저 실행하여 작업 계획을 설정하세요"라고 응답하고 중단하세요.
 
-**완전 자동화 실행 알고리즘**:
+**스마트 자동화 실행 알고리즘**:
 ```
+작업_타입 = plan-output.md에서 감지
+워크플로우_순서 = 작업_타입별_최적_순서[작업_타입]
+
 while (미완료_TODO_개수 > 0) {
-    1. 다음 미완료 TODO 선택
-    2. 작업 실행
+    1. 워크플로우_순서에 따라 다음 TODO 선택
+    2. 작업 타입별 최적화된 방법으로 실행
     3. plan-output.md 업데이트 (완료 표시, 진행률 갱신)
     4. 즉시 루프 계속 (절대 중단 금지)
 }
 ```
 
-**실행 루프 시작**: plan-output.md에 미완료 TODO가 하나라도 있는 한 다음을 무한 반복하세요:
-
-**작업 선택**: plan-* → doc-* → test-* → impl-* → refactor-* 순서로 다음 미완료 TODO를 선택하세요.
+**작업 선택 최적화**: 작업 타입에 따른 우선순위로 다음 미완료 TODO를 선택하세요:
+- **버그 수정**: impl-fix → test-verify 순서
+- **기능 추가**: plan-feature → impl-core → test-integration 순서  
+- **아키텍처 변경**: plan-architecture → doc-design → test-strategy → impl-phases 순서
+- **표준 구축**: plan-standards → doc-standards → impl-apply → test-compliance 순서
+- **리팩토링**: test-existing → impl-refactor → test-regression 순서
 
 **진행 상태 업데이트**: plan-output.md를 Edit로 수정하여:
 - 선택된 TODO를 "진행중" 상태로 표시
 - "현재 작업" 항목을 선택된 TODO로 업데이트
 - 작업 시작 시간을 "작업 기록" 섹션에 추가
 
-**관련 문서 읽기**: docs/[해당카테고리]/[관련문서].md를 읽어서 요구사항과 제약사항을 확인하세요.
+**지속적 가치 문서 필터링**: 문서 작성 전에 다음을 확인하세요:
+
+### 저장할 문서 (장기적 가치)
+- **interfaces/**: 외부 시스템 연동, 공개 API, 데이터 교환 프로토콜
+- **design/**: 아키텍처 변경, 새로운 모듈 설계, 복잡한 구조 변경  
+- **logic/**: 복잡한 비즈니스 규칙, 도메인 정책, 계산 알고리즘
+- **standards/**: UI/UX 가이드, 로깅 가이드, 코딩 컨벤션, 보안 표준
+
+### 저장하지 않을 문서 (일회성)
+- 마이그레이션 계획서, 버그 수정 분석, 임시 작업 가이드
 
 **작업 유형별 실행**:
 
 **계획 작업 (plan-*)인 경우**:
-요구사항을 상세 분석하고 기능 분해를 수행하세요. 하위 작업을 식별하고 우선순위를 결정하세요. 필요한 경우 plan-output.md에 추가 TODO를 생성하세요.
+요구사항을 상세 분석하고 기능 분해를 수행하세요. 작업 타입에 맞는 최적화된 TODO를 생성하세요. 일회성 문서 생성은 건너뛰세요.
 
 **문서 작업 (doc-*)인 경우**:
-plan-output.md의 링크를 참조해서 해당 카테고리의 상세 문서를 작성하세요. 요구사항, 설계, 인터페이스, 비즈니스 로직을 문서화하세요. docs/[category]/[document].md 파일을 작성하세요. 
+지속적 가치가 있는 문서만 작성하세요. plan-output.md의 "장기적 가치 문서" 섹션에 명시된 문서만 docs/[category]/[document].md로 작성하세요. 
 
 **작업 완료 시 plan-output.md 실시간 업데이트**:
 - 해당 TODO를 ✅ 체크 완료로 표시
@@ -76,12 +114,11 @@ SOLID 원칙을 적용해서 코드를 개선하세요. 테스트가 계속 통�
 
 **문서 동기화**: 인터페이스나 비즈니스 로직, 설계가 변경될 때마다 즉시 해당 docs/ 문서를 업데이트하세요.
 
-**각 작업 후 일관성 검증**:
-- docs/requirements/ ↔ 구현된 기능 검증
-- docs/design/ ↔ 코드 구조 검증
-- docs/logic/ ↔ 비즈니스 로직 검증
-- docs/interfaces/ ↔ 인터페이스 검증
-- docs/testing/ ↔ 테스트 결과 검증
+**각 작업 후 일관성 검증** (지속적 가치 문서만):
+- docs/interfaces/ ↔ 인터페이스 구현 검증 (외부 연동시)
+- docs/design/ ↔ 코드 구조 검증 (복잡한 시스템)
+- docs/logic/ ↔ 비즈니스 로직 검증 (복잡한 로직)
+- docs/standards/ ↔ 표준 준수 검증 (표준 작업시)
 
 불일치를 발견하면:
 1. 즉시 해당 docs/[category]/[file].md를 업데이트
@@ -95,13 +132,11 @@ SOLID 원칙을 적용해서 코드를 개선하세요. 테스트가 계속 통�
 
 전체 테스트를 실행하세요. 모든 테스트가 통과하고 테스트 커버리지를 확인하세요.
 
-각 Context 문서를 최종 검증하세요:
-- docs/requirements/: 모든 요구사항 구현 확인
-- docs/design/: 설계 원칙 준수 확인
-- docs/logic/: 비즈니스 규칙 반영 확인
+지속적 가치 문서를 최종 검증하세요 (존재하는 경우만):
 - docs/interfaces/: 인터페이스 계약 이행 확인
-- docs/testing/: 테스트 전략 완료 확인
-- docs/implementation/: 구현 가이드라인 준수 확인
+- docs/design/: 설계 원칙 준수 확인  
+- docs/logic/: 비즈니스 규칙 반영 확인
+- docs/standards/: 표준 가이드라인 준수 확인
 
 plan-output.md를 최종 업데이트하세요:
 - 모든 TODO가 ✅ 완료 상태인지 확인
@@ -111,7 +146,7 @@ plan-output.md를 최종 업데이트하세요:
 - 완료 보고서를 "작업 기록" 섹션에 추가
 - 전체 소요 시간과 결과 요약 추가
 
-"Universal Document-Driven TDD 완료. 모든 Context가 코드와 동기화되었습니다. plan-output.md가 최종 상태로 업데이트되었습니다."라고 응답하세요.
+"스마트 작업 실행 완료. 지속적 가치 문서가 코드와 동기화되었습니다. plan-output.md가 최종 상태로 업데이트되었습니다."라고 응답하세요.
 
 **중요**: 각 작업 완료 시마다 반드시 plan-output.md를 즉시 업데이트하여 진행 상황을 실시간으로 추적하세요.
 
