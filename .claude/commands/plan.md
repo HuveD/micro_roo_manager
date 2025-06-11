@@ -135,22 +135,42 @@ ultrathink: $ARGUMENTS
 - 링크: docs/implementation/[파일명]
 
 ## TODO 목록
-
-### 계획 수립
 - [ ] plan-[프로젝트]: 전체 프로젝트 계획 수립 (HIGH)
-- [ ] plan-[핵심기능]: [기능명] 상세 계획 (HIGH)
-
-### 문서화 작업
-[요구사항에 필요한 문서만]
+  - [ ] plan-[핵심기능1]: [기능명] 상세 계획
+  - [ ] plan-[핵심기능2]: [기능명] 상세 계획
+  - [ ] plan-dependencies: 기능 간 의존성 분석
 - [ ] doc-requirements-[주제]: [요구사항] 명세 작성 (HIGH)
+  - [ ] doc-requirements-functional: 기능 요구사항 명세
+  - [ ] doc-requirements-non-functional: 비기능 요구사항 명세
 - [ ] doc-design-[주제]: [설계] 문서 작성 (HIGH)
+  - [ ] doc-design-architecture: 전체 구조 설계
+  - [ ] doc-design-components: 컴포넌트 설계
 - [ ] doc-interfaces-[주제]: [인터페이스] 명세 작성 (HIGH)
-
-### 개발 작업 (Universal Document-Driven TDD)
-[요구사항에서 식별된 기능들]
-- [ ] test-[기능]-[시나리오]: [기능] 테스트 작성 (HIGH)
-- [ ] impl-[기능]-[컴포넌트]: [기능] 구현 (MEDIUM)
-- [ ] refactor-[기능]: [기능] 리팩토링 (LOW)
+  - [ ] doc-interfaces-api: API 명세
+  - [ ] doc-interfaces-data: 데이터 모델 명세
+- [ ] test-[기능1]-[시나리오]: [기능] 테스트 작성 (HIGH)
+  - [ ] test-[기능1]-unit: 단위 테스트 설계
+  - [ ] test-[기능1]-integration: 통합 테스트 설계
+- [ ] test-[기능2]-[시나리오]: [기능] 테스트 작성 (HIGH)
+  - [ ] test-[기능2]-unit: 단위 테스트 설계
+  - [ ] test-[기능2]-integration: 통합 테스트 설계
+- [ ] impl-[기능1]-[컴포넌트]: [기능] 구현 (MEDIUM)
+  - [ ] impl-[기능1]-core: 핵심 로직 구현
+  - [ ] impl-[기능1]-interface: 인터페이스 구현
+- [ ] impl-[기능2]-[컴포넌트]: [기능] 구현 (MEDIUM)
+  - [ ] impl-[기능2]-core: 핵심 로직 구현
+  - [ ] impl-[기능2]-interface: 인터페이스 구현
+- [ ] quality-requirements: 요구사항 추적 가능성 확보 (HIGH)
+- [ ] quality-test-coverage: 핵심 로직 테스트 커버리지 100% (HIGH)
+- [ ] quality-documentation: 문서화 완성도 검증 (MEDIUM)
+- [ ] quality-code-standards: 코드 품질 기준 준수 (MEDIUM)
+- [ ] quality-performance: 성능 요구사항 충족 (LOW)
+- [ ] refactor-[기능1]: [기능] 리팩토링 (LOW)
+  - [ ] refactor-[기능1]-structure: 코드 구조 개선
+  - [ ] refactor-[기능1]-performance: 성능 최적화
+- [ ] refactor-[기능2]: [기능] 리팩토링 (LOW)
+  - [ ] refactor-[기능2]-structure: 코드 구조 개선
+  - [ ] refactor-[기능2]-performance: 성능 최적화
 
 ### 진행 상태
 - 총 작업 수: [N]개
@@ -158,13 +178,6 @@ ultrathink: $ARGUMENTS
 - 진행률: 0%
 - 현재 작업: [첫 번째 TODO] (대기중)
 - 다음 작업: [두 번째 TODO]
-
-### 품질 체크포인트
-- [ ] 요구사항 추적 가능성 확보
-- [ ] 핵심 로직 테스트 커버리지 100%
-- [ ] 문서화 완성도 검증
-- [ ] 코드 품질 기준 준수
-- [ ] 성능 요구사항 충족
 
 ## 작업 기록
 [act 명령어가 업데이트]
