@@ -1,4 +1,4 @@
-로컬 설정(.claude/settings.local.json)에 있는 허용 명령어 중 프로젝트 설정(.claude/settings.json)에 없는 명령어를 자동으로 추가해주세요.
+로컬 설정(.claude/settings.local.json)에 있는 허용 명령어 중 프로젝트 설정(.claude/settings.json)에 없는 명령어를 자동으로 추가해주세요. ultrathink.
 
 다음 단계를 따라주세요:
 1. .claude/settings.local.json 파일의 permissions.allow 배열 읽기

@@ -1,4 +1,4 @@
-ultrathink: plan-output.md를 기반으로 Universal Document-Driven TDD 방식으로 작업을 실행하세요.
+plan-output.md를 기반으로 Universal Document-Driven TDD 방식으로 작업을 실행하세요. ultrathink.
 
 **핵심 원칙**: 이것은 완전 자동화된 작업 실행 명령입니다. 한 번 시작하면 모든 TODO가 완료될 때까지 절대 멈추지 마세요. 
 
