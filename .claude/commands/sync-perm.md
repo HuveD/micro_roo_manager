@@ -1,4 +1,4 @@
-로컬 설정(.claude/settings.local.json)에 있는 허용 명령어 중 프로젝트 설정(.claude/settings.json)에 없는 명령어를 자동으로 추가해주세요. ultrathink.
+로컬 설정(.claude/settings.local.json)에 있는 허용 명령어 중 프로젝트 설정(.claude/settings.json)에 없는 명령어를 자동으로 추가해주세요.
 `CWD`를 기준으로 검색하고 프로젝트 범위를 벗어나지 마세요.
 
 다음 단계를 따라주세요:
