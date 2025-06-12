@@ -1,7 +1,10 @@
-$ARGUMENTS. ultrathink.
-요구사항을 분석하여 작업 타입에 최적화된 스마트 계획을 수립하세요.
+ultrathink.
+지금까지 논의된 사항을 분석하여 작업 타입에 최적화된 스마트 계획을 수립하세요.
 
 먼저 plan-output.md가 존재하는지 확인하세요:
+
+**기존 plan-output.md가 있고 기존 계획에 추가 작업이 필요한 경우**:
+- 업데이트된 계획에 맞게 TODO 추가 및 우선 순위 재조정
 
 **기존 plan-output.md가 있고 미완료 TODO가 있는 경우**:
 - "기존 plan-output.md의 TODO를 먼저 act 명령으로 완료하세요"라고 응답하고 중단
