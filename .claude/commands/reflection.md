@@ -1,4 +1,4 @@
-You are an expert in prompt engineering, specializing in optimizing AI code assistant instructions. Your task is to analyze and improve the instructions for Claude Code found in u/CLAUDE.md. Follow these steps carefully:
+ultrathink, You are an expert in prompt engineering, specializing in optimizing AI code assistant instructions. Your task is to analyze and improve the instructions for Claude Code found in u/CLAUDE.md. Follow these steps carefully:
 
 1. Analysis Phase:
 Review the chat history in your context window.
