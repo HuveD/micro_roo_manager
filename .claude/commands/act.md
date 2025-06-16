@@ -17,13 +17,22 @@ plan-output.md가 없거나 TODO 목록이 비어있다면 "plan 명령을 먼�
 1. plan-output.md의 TODO 목록을 파싱
 2. 내장 TODO 도구와 동기화:
    ```
-   각 TODO 항목:
-   - ID: TODO 전체 텍스트를 kebab-case로 변환 (예: "Loki Hook 인터페이스 설계" → "loki-hook-interface-design")
+   각 TODO 항목마다 2개의 내장 TODO 생성:
+   
+   1) 작업 TODO:
+   - ID: TODO 전체 텍스트를 kebab-case로 변환 (예: "test-spec-webview-dependency")
    - content: 원본 TODO 설명
-   - status: ☐ → pending, ☒ → completed
+   - status: [x] → completed, [ ] → pending
    - priority: 작업 타입별 워크플로우 순서에 따라 자동 설정
+   
+   2) 업데이트 TODO (작업 TODO 바로 다음에 추가):
+   - ID: "update-plan-" + 작업 TODO ID
+   - content: "[작업 TODO ID] 작업 내용 plan-output.md에 기록"
+   - status: pending (항상 pending으로 시작)
+   - priority: 작업 TODO와 동일
    ```
 3. TodoWrite로 전체 TODO 리스트 생성/업데이트
+4. **중요**: 작업 기록의 완료 상태와 TODO 체크박스를 항상 동기화
 
 ## 2. 작업 타입별 실행 전략
 
@@ -57,11 +66,14 @@ while (미완료_TODO_존재) {
        - impl-*: 최소 코드로 테스트 통과
        - refactor-*: SOLID 원칙 적용하여 개선
     
-    4. 작업 완료 시 동기화:
-       - TodoWrite로 상태를 completed로 변경
-       - plan-output.md의 TODO를 ☐ → ☒로 변경
-       - 진행률 업데이트 (완료/전체 * 100%)
-       - 작업 기록에 시간과 결과 추가
+    4. 작업 완료 시:
+       - TodoWrite로 작업 TODO 상태를 completed로 변경
+       - 대응하는 "update-plan-*" TODO를 즉시 처리:
+         * plan-output.md의 TODO를 [ ] → [x]로 변경
+         * 작업 기록에 "[YYYY-MM-DD 완료]" 형식으로 추가
+         * 진행률 업데이트 (완료/전체 * 100%)
+       - "update-plan-*" TODO도 completed로 변경
+       - **보장**: 모든 작업은 plan-output.md에 즉시 반영
     
     5. 품질 검증:
        - 테스트 실행 및 통과 확인
@@ -87,7 +99,8 @@ while (미완료_TODO_존재) {
 
 1. **최종 동기화 검증**:
    - 내장 TODO와 plan-output.md 상태 일치 확인
-   - 모든 TODO가 ☒/completed 상태인지 검증
+   - 모든 TODO가 [x]/completed 상태인지 검증
+   - 작업 기록의 모든 완료 항목이 TODO 체크박스에 반영되었는지 확인
 
 2. **품질 보증**:
    - 전체 테스트 실행 및 커버리지 확인
@@ -114,3 +127,48 @@ while (미완료_TODO_존재) {
 - 모든 테스트 통과까지 계속 수정
 
 **기억하세요**: act는 완전 자동화 명령입니다. 시작하면 100% 완료까지 절대 멈추지 않습니다.
+
+## 6. TODO 동기화 예시
+
+### 작업 시작 시 (plan-output.md 읽고 나서)
+```
+# plan-output.md의 TODO:
+- [ ] test-spec-webview-dependency: webview_flutter 패키지 추가 테스트 작성
+- [x] impl-add-webview-dependency: webview_flutter 패키지 추가 (작업 기록에 완료 표시)
+- [ ] test-spec-webview-button: 홈 화면에 웹뷰 버튼 추가 테스트
+
+# 내장 TODO로 동기화:
+todos = [
+  {id: "test-spec-webview-dependency", content: "webview_flutter 패키지 추가 테스트 작성", status: "pending", priority: "high"},
+  {id: "update-plan-test-spec-webview-dependency", content: "test-spec-webview-dependency 작업 내용 plan-output.md에 기록", status: "pending", priority: "high"},
+  {id: "impl-add-webview-dependency", content: "webview_flutter 패키지 추가", status: "completed", priority: "high"},
+  {id: "update-plan-impl-add-webview-dependency", content: "impl-add-webview-dependency 작업 내용 plan-output.md에 기록", status: "completed", priority: "high"},
+  {id: "test-spec-webview-button", content: "홈 화면에 웹뷰 버튼 추가 테스트", status: "pending", priority: "high"},
+  {id: "update-plan-test-spec-webview-button", content: "test-spec-webview-button 작업 내용 plan-output.md에 기록", status: "pending", priority: "high"}
+]
+```
+
+### 작업 완료 시
+```
+# test-spec-webview-dependency 작업 완료 후:
+1. TodoWrite로 작업 TODO status를 "completed"로 변경
+2. update-plan-test-spec-webview-dependency TODO 즉시 처리:
+   - plan-output.md의 TODO를 [ ] → [x]로 변경
+   - 작업 기록에 "[2025-06-15 완료]" 추가
+3. update-plan TODO도 "completed"로 변경
+
+# 동기화 결과:
+plan-output.md:
+- [x] test-spec-webview-dependency: webview_flutter 패키지 추가 테스트 작성
+[2025-06-15 완료] test-spec-webview-dependency: 패키지 의존성 검증 테스트 작성 완료
+
+내장 TODO:
+{id: "test-spec-webview-dependency", status: "completed"}
+{id: "update-plan-test-spec-webview-dependency", status: "completed"}
+```
+
+### 중요: update-plan TODO로 동기화 보장
+- **각 작업 TODO마다 update-plan TODO가 자동 생성됨**
+- 작업 완료 → update-plan TODO 처리 → plan-output.md 업데이트
+- update-plan TODO가 있으면 반드시 처리해야 다음 작업 진행
+- 이 방식으로 작업 기록과 TODO 체크박스 불일치를 원천 차단
