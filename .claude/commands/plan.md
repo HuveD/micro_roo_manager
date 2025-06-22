@@ -1,4 +1,4 @@
-{{ARGUMENTS}} ultrathink, thinkdeep with zen. 아래 지침에 따라 계획을 수립하고 자동으로 실행하세요.
+{{ARGUMENTS}} ultrathink, Use `zen` mcp to use `thinkdeep` tool. 아래 지침에 따라 계획을 수립하고 자동으로 실행하세요.
 
 **핵심**: TodoWrite로 모든 작업 기록 + plan-output.md 실시간 업데이트
 

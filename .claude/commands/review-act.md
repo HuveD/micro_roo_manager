@@ -1,4 +1,4 @@
-ultrathink, codereview with zen. plan-output.md와 git 변경사항을 검토하여 코드 품질을 평가합니다.
+ultrathink, Use `zen` mcp to use `codereview` tool. plan-output.md와 git 변경사항을 검토하여 코드 품질을 평가합니다.
 
 ## 검토 범위
 

@@ -1,1 +1,1 @@
-ultrathink, consensus with zen. {{ARGUMENTS}}
+ultrathink, Use `zen` mcp to use `consensus` tool. {{ARGUMENTS}}

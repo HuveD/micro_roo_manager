@@ -1,4 +1,4 @@
-ultrathink, debug with zen. 아래 지침에 따라 {{ARGUMENTS}}에 대한 체계적인 디버깅을 통해 문제의 근본 원인을 파악하고, 증거 기반의 해결방안을 제시합니다.
+ultrathink, Use `zen` mcp to use `debug` tool. 아래 지침에 따라 {{ARGUMENTS}}에 대한 체계적인 디버깅을 통해 문제의 근본 원인을 파악하고, 증거 기반의 해결방안을 제시합니다.
 
 # 심층 디버깅 및 근본 원인 분석
 

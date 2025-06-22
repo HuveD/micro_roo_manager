@@ -1,1 +1,1 @@
-ultrathink, chat with zen. {{ARGUMENTS}}
+ultrathink, Use `zen` mcp to use `chat` tool. {{ARGUMENTS}}
