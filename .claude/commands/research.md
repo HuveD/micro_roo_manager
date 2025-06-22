@@ -1,4 +1,4 @@
-ultrathink, 아래 지침에 따라 {{ARGUMENTS}}에 대한 심층적이고 종합적인 리서치를 수행합니다.
+ultrathink, consensus with zen. 아래 지침에 따라 {{ARGUMENTS}}에 대한 심층적이고 종합적인 리서치를 수행합니다.
 
 ## 리서치 실행 프로세스
 
