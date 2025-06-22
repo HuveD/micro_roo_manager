@@ -12,7 +12,7 @@
    └─ docs/ 구조 파악
 
 2. 계획 수립
-   ├─ TodoWrite로 모든 작업 등록 (필수)
+   ├─ TodoWrite로 모든 작업 등록 + 각 작업 뒤에 'plan-output.md 업데이트' 작업 추가 (필수)
    ├─ plan-output.md 생성 (프로젝트 루트)
    └─ "계획대로 진행하겠습니다" 선언
 ```
@@ -25,10 +25,12 @@ FOR each TODO:
    3. 구현 방식 결정 및 실행:
       - TDD 적용: RED(실패 테스트) → GREEN(구현) → REFACTOR(개선)
       - TDD 미적용: Task 작업 시작
-   4. plan-output.md 업데이트 (Read → Write 순서 필수)
-   5. 완료시 상태 → 'completed'로 변경
+   4. 완료시 상태 → 'completed'로 변경
+   5. 다음 'plan-output.md 업데이트' 작업으로 이동
+   6. plan-output.md 업데이트 (Read → Write 순서 필수)
 
 핵심 작업 완료시:
+   - 이미 등록된 'plan-output.md 업데이트' 작업 실행
    - plan-output.md 즉시 업데이트 (파일 읽기 후 쓰기)
    - 진행률, 이슈, 해결사항 기록
    - Write 전에 반드시 Read로 파일 확인
@@ -121,7 +123,7 @@ FOR each TODO:
 - 업데이트 방법: 반드시 Read로 파일 확인 후 Write 실행
 
 **필수 체크**:
-- [ ] TodoWrite로 모든 작업 등록
+- [ ] TodoWrite로 모든 작업 등록 및 각 작업 뒤에 'plan-output.md 업데이트' 작업 명시적 추가
 - [ ] plan-output.md 생성 (프로젝트 루트) 및 Read→Write 순서로 업데이트
 - [ ] 테스트 필요성 평가 (위 기준 참조)
 - [ ] 새 팀원 관점 문서 업데이트
