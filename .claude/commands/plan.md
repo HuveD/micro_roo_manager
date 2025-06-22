@@ -1,6 +1,6 @@
 {{ARGUMENTS}} ultrathink, Use `zen` mcp to use `thinkdeep` tool. 아래 지침에 따라 계획을 수립하고 자동으로 실행하세요.
 
-**핵심**: TodoWrite로 모든 작업 기록 + plan-output.md 실시간 업데이트
+**핵심**: TodoWrite로 모든 작업 기록 + plan-output.md 작업 완료시 업데이트
 
 ## 🚀 실행 프로세스 (3단계)
 
@@ -9,7 +9,6 @@
 1. 현황 파악
    ├─ CLAUDE.md 확인
    ├─ TodoRead로 기존 작업 확인
-   ├─ plan-output.md 확인 (미완료시 중단)
    └─ docs/ 구조 파악
 
 2. 계획 수립
@@ -21,11 +20,13 @@
 ### Phase 2: 자동 실행
 ```
 FOR each TODO:
-   1. 상태 → 'in_progress'
+   1. 상태 → 'in_progress'로 변경
    2. 테스트 필요성 평가 (아래 기준 참조)
-   3. 구현 (TDD or 직접)
+   3. 구현 방식 결정 및 실행:
+      - TDD 적용: RED(실패 테스트) → GREEN(구현) → REFACTOR(개선)
+      - TDD 미적용: Task 작업 시작
    4. plan-output.md 업데이트 (Read → Write 순서 필수)
-   5. 완료시 상태 → 'completed'
+   5. 완료시 상태 → 'completed'로 변경
 
 핵심 작업 완료시:
    - plan-output.md 즉시 업데이트 (파일 읽기 후 쓰기)
@@ -55,9 +56,9 @@ FOR each TODO:
 
 ## 📈 작업 목록
 
-### Task 1: [작업명] ([TDD/직접])
+### Task 1: [작업명] (TDD 적용: [예/아니오])
 - **상태**: [⏸️대기/⏳진행/✅완료] (시간)
-- **테스트 필요성**: [✅필수/❌불필요] (이유)
+- **TDD 프로세스**: [적용시: RED→GREEN→REFACTOR / 미적용시: Task 작업 시작]
 - **구현 내용**: [핵심 내용]
 - **결과**: [테스트 통과율, 성과]
 
@@ -79,9 +80,10 @@ FOR each TODO:
 
 ## 🛠️ 테스트 전략 (Pragmatic TDD)
 
-### 테스트 필요성 평가
+### 테스트 필요성 평가 기준
 ```
 테스트 가치 = (복잡도 × 비즈니스 중요도) / 유지보수 비용
+(개념적 공식: 핵심 로직 위주로 테스트 작성, 과도한 테스트 지양)
 
 ✅ TDD 필수 (높은 ROI)
 ├─ 핵심 비즈니스: 가격계산, 권한검증, 결제처리
