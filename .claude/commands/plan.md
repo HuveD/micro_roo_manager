@@ -14,8 +14,7 @@
 
 2. 계획 수립
    ├─ TodoWrite로 모든 작업 등록 (필수)
-   ├─ 5분 업데이트 리마인더 TODO 추가
-   ├─ plan-output.md 생성
+   ├─ plan-output.md 생성 (프로젝트 루트)
    └─ "계획대로 진행하겠습니다" 선언
 ```
 
@@ -25,12 +24,13 @@ FOR each TODO:
    1. 상태 → 'in_progress'
    2. 테스트 필요성 평가 (아래 기준 참조)
    3. 구현 (TDD or 직접)
-   4. plan-output.md 업데이트
+   4. plan-output.md 업데이트 (Read → Write 순서 필수)
    5. 완료시 상태 → 'completed'
 
-리마인더 TODO 실행시:
-   - 5분마다 plan-output.md 업데이트
+핵심 작업 완료시:
+   - plan-output.md 즉시 업데이트 (파일 읽기 후 쓰기)
    - 진행률, 이슈, 해결사항 기록
+   - Write 전에 반드시 Read로 파일 확인
 ```
 
 ### Phase 3: 문서 동기화
@@ -51,7 +51,7 @@ FOR each TODO:
 ## 📊 진행 상황
 - 시작: YYYY-MM-DD HH:MM
 - 상태: 진행중 (X/Y 완료, XX%)
-- 다음 업데이트: HH:MM (5분 후)
+- 다음 업데이트: 다음 핵심 작업 완료시
 
 ## 📈 작업 목록
 
@@ -109,12 +109,17 @@ FOR each TODO:
 ## ⚡ 실행 요약
 
 ```
-시작 → 현황파악 → TodoWrite(작업+리마인더) → plan-output.md 생성 
-→ "계획대로 진행하겠습니다" → 자동 실행 (5분마다 업데이트)
+시작 → 현황파악 → TodoWrite(작업목록) → plan-output.md 생성 (프로젝트 루트)
+→ "계획대로 진행하겠습니다" → 자동 실행 → 핵심 작업 완료시 Read→Write로 업데이트
 ```
 
+**plan-output.md 업데이트 규칙**:
+- 파일 위치: 항상 프로젝트 루트 경로 (없으면 생성)
+- 업데이트 시점: 각 핵심 작업 완료 직후
+- 업데이트 방법: 반드시 Read로 파일 확인 후 Write 실행
+
 **필수 체크**:
-- [ ] TodoWrite로 모든 작업 등록 (리마인더 포함)
-- [ ] plan-output.md 생성 및 5분 업데이트
+- [ ] TodoWrite로 모든 작업 등록
+- [ ] plan-output.md 생성 (프로젝트 루트) 및 Read→Write 순서로 업데이트
 - [ ] 테스트 필요성 평가 (위 기준 참조)
 - [ ] 새 팀원 관점 문서 업데이트
