@@ -1,0 +1,1 @@
+ultrathink, chat with zen. {{ARGUMENTS}}
