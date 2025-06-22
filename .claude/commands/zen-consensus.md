@@ -1,1 +1,0 @@
-ultrathink, Use `zen` mcp to use `consensus` tool. {{ARGUMENTS}}

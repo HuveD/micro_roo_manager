@@ -1,1 +1,0 @@
-ultrathink, Use `zen` mcp to use `chat` tool. {{ARGUMENTS}}
