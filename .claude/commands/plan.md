@@ -26,7 +26,7 @@
 
 3. 계획 수립
    - TodoWrite로 모든 작업 등록 + 각 작업 뒤에 'plan-output.md 업데이트' 작업 추가 (필수)
-   - plan-output.md 생성 (프로젝트 루트)
+   - plan-output.md 생성 (프로젝트 루트, UTF-8 인코딩 필수)
    - 컨벤션 준수 사항 명시
    - "계획대로 진행하겠습니다" 선언
 ```
@@ -41,11 +41,11 @@ FOR each TODO:
       - TDD 미적용: Task 작업 시작
    4. 완료시 상태 -> 'completed'로 변경
    5. 다음 'plan-output.md 업데이트' 작업으로 이동
-   6. plan-output.md 업데이트 (Read -> Write 순서 필수)
+   6. plan-output.md 업데이트 (Read -> Write 순서 필수, UTF-8 인코딩)
 
 핵심 작업 완료시:
    - 이미 등록된 'plan-output.md 업데이트' 작업 실행
-   - plan-output.md 즉시 업데이트 (파일 읽기 후 쓰기)
+   - plan-output.md 즉시 업데이트 (파일 읽기 후 UTF-8로 쓰기)
    - 진행률, 이슈, 해결사항 기록
    - Write 전에 반드시 Read로 파일 확인
 ```
@@ -172,6 +172,7 @@ FOR each TODO:
 
 **plan-output.md 업데이트 규칙**:
 - 파일 위치: 항상 프로젝트 루트 경로 (없으면 생성)
+- 파일 인코딩: 반드시 UTF-8 인코딩 사용
 - 업데이트 시점: 각 핵심 작업 완료 직후
 - 업데이트 방법: 반드시 Read로 파일 확인 후 Write 실행
 
