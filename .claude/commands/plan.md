@@ -1,4 +1,7 @@
-{{ARGUMENTS}} ultrathink, Use `zen` mcp to use `thinkdeep` tool. 아래 지침에 따라 계획을 수립하고 자동으로 실행하세요.
+{{ARGUMENTS}} ultrathink, Use `zen` mcp to use `thinkdeep` tool. 
+- `Plan mode`로 진입합니다.
+- 분석, 설계 등에 `sub-tasks`를 적극적으로 활용하여 정확한 분석 및 구체적인 계획을 세우도록 합니다.
+- 이제 아래 지침에 따라 계획을 수립하고 자동으로 실행하세요.
 
 **핵심**: TodoWrite로 모든 작업 기록 + plan-output.md 작업 완료시 업데이트
 
