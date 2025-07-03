@@ -1,6 +1,6 @@
-'{{ARGUMENTS}}' ultrathink, Planning with `o3`. 
-- `Plan mode`로 진입합니다.
-- 분석, 설계 등에 `sub-tasks`를 적극적으로 활용하여 정확한 분석 및 구체적인 계획을 세우도록 합니다.
+'{{ARGUMENTS}}' ultrathink.
+- use thinkdeep with `o3`. 분석, 설계 등에 `sub-tasks`를 적극적으로 활용하여 정확한 분석 및 구체적인 계획을 세우도록 합니다.
+- 모든 분석 및 논의가 끝나면 `Plan mode`로 진입합니다.
 - 이제 아래 지침에 따라 계획을 수립하고 자동으로 실행하세요.
 
 **핵심**: TodoWrite로 모든 작업 기록 + plan-output.md 작업 완료시 업데이트
