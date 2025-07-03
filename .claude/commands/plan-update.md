@@ -1,4 +1,4 @@
-'{{ARGUMENTS}}' 지금까지 논의된 내용을 바탕으로 추가 계획을 세웁니다. ultrathink.
+'{{ARGUMENTS}}' 지금까지 논의된 내용을 바탕으로 추가 계획을 세웁니다. `plan-output.md`를 업데이트하세요. ultrathink.
 - use thinkdeep with `o3`. 분석, 설계 등에 `sub-tasks`를 적극적으로 활용하여 정확한 분석 및 구체적인 계획을 세우도록 합니다.
 - 외부 정보, 자료 등이 필요한 경우 `firecrawl`, `perplexity`, `context7` 등 적합한 MCP를 적극적으로 활용하여 정보의 품질을 높입니다.
 - 모든 분석 및 논의가 끝나면 `Plan mode`로 진입합니다.
